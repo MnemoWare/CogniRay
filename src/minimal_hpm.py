@@ -95,4 +95,9 @@ class MinimalHPM(torch.nn.Module):
         # Read batch
         result = self.read(all_origins, all_dirs)
 
+        P, R, C, V = 6, result.shape[0] // 6, result.shape[-1], 3
+        result = result.reshape([P, R, C])
+        all_origins = all_origins.reshape([P, R, V])
+        all_dirs = all_dirs.reshape([P, R, V])
+
         return result, all_origins, all_dirs

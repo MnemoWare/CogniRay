@@ -11,11 +11,18 @@ from src.minimal_hpm import MinimalHPM
 
 torch.manual_seed(1337)
 
+#
+# Experiment 01:
+#   The details and interpretation of the experiment are described in: /docs/Experiment 01.md
+#
 # Result:
-# Step 00 | MSE: 0.989227
-# ...
-# Step 49 | MSE: 0.067038
-# Stable convergence.
+#   Step 00 | MSE: 0.989227
+#   ...
+#   Step 49 | MSE: 0.067038
+#
+# Note:
+#   Stable convergence.
+#
 
 # Params
 B = 2048

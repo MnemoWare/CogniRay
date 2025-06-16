@@ -17,6 +17,14 @@ This repository contains:
 
 ---
 
+## News  
+
+**06/2025**:  
+- **Experiment 01**: HPM converges rapidly from zero to target projections under exact rays — validating core update mechanics.  
+- **Experiment 02**: HPM self-organizes from noise using only inferred projections — stable convergence, semantic drift, no backprop needed.  
+
+---
+
 ## Key Concepts and Advantages
 
 ### **Geometric Access to Memory**

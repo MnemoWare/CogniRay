@@ -7,6 +7,9 @@ class MinimalHPM(torch.nn.Module):
         channels: int = 16,
         tau: float = 2.0,
         sigma: float = 0.5,
+        init: bool = False,
+        init_mean: float = 0.0,
+        init_std: float = 0.01,
     ) -> None:
         super().__init__()
         self.memory = torch.nn.Parameter(torch.zeros(*shape, channels))
@@ -20,6 +23,12 @@ class MinimalHPM(torch.nn.Module):
             indexing='ij'
         ), dim=-1).float()
         self.register_buffer("grid", grid)
+
+        if init:
+            with torch.no_grad():
+                self.memory.normal_(mean=init_mean, std=init_std)
+        
+        pass
 
     def kernel(
         self,

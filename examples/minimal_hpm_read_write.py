@@ -35,6 +35,7 @@ hpm = MinimalHPM(
     channels=C,
     tau=tau,
     sigma=sigma,
+    init=False,
 ).to(device)
 
 # Fixed random targets

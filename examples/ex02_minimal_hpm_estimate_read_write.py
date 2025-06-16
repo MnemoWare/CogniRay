@@ -11,11 +11,18 @@ from src.minimal_hpm import MinimalHPM
 
 torch.manual_seed(1337)
 
+#
+# Experiment 02:
+#   The details and interpretation of the experiment are described in: /docs/Experiment 02.md
+#
 # Result:
-# Step 00 | MSE: 0.908733
-# ...
-# Step 49 | MSE: 0.717166
-# Slow, but stable convergence.
+#   Step 00 | MSE: 0.908733
+#   ...
+#   Step 49 | MSE: 0.717166
+#
+# Note:
+#   Slow, but stable convergence.
+#
 
 # Params
 B = 4096 # One sample per possible discrete ray source
@@ -112,9 +119,6 @@ def recover_optimal_projection(
     return x0, v0
 
 # Targets
-ray_origins = torch.rand(B, 3) * float(side)
-ray_dirs = torch.randn(B, 3)
-ray_dirs = ray_dirs / ray_dirs.norm(dim=-1, keepdim=True)
 targets = torch.randn(B, C)
 targets = targets.to(device)
 

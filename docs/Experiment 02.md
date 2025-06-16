@@ -2,7 +2,7 @@
 
 **Related source code**  
 
-The source code of the experiment is: /examples/minimal_hpm_estimate_read_write.py
+The source code of the experiment is: /examples/ex02_minimal_hpm_estimate_read_write.py
 
 **Objective**
 

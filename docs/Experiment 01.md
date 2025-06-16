@@ -1,4 +1,4 @@
-# Title: Experiment 01: Baseline Convergence of HPM with Exact Projection Geometry
+# Experiment 01: Baseline Convergence of HPM with Exact Projection Geometry
 
 **Related source code**  
 

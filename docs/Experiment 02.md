@@ -38,8 +38,8 @@ To empirically demonstrate that Holographic Projection Memory (HPM) remains stab
 
 ## Observed Results
 
-* Initial MSE: \~0.91
-* Final MSE after 50 steps: \~0.71
+* Initial MSE: \~0.90
+* Final MSE after 50 steps: \~0.72
 * Stable, monotonic convergence without collapse or oscillation.
 * All updates are performed without classical backpropagation.
 * Ray geometry is continually inferred from the evolving field itself, with no external supervision.

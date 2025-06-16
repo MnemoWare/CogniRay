@@ -1,6 +1,6 @@
 # CogniRay
 
-Differentiable geometric memory for adaptive reasoning, from MnemoWare.
+Differentiable geometric memory for adaptive reasoning.
 
 ---
 

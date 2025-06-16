@@ -21,7 +21,12 @@ class MinimalHPM(torch.nn.Module):
         ), dim=-1).float()
         self.register_buffer("grid", grid)
 
-    def kernel(self, x, ray_origin, ray_dir):
+    def kernel(
+        self,
+        x: torch.Tensor,
+        ray_origin: torch.Tensor,
+        ray_dir: torch.Tensor,
+    ) -> torch.Tensor:
         dx = x - ray_origin
         t = (dx * ray_dir).sum(-1)
         x_proj = ray_origin + t[..., None] * ray_dir
@@ -29,7 +34,11 @@ class MinimalHPM(torch.nn.Module):
         kernel = torch.exp(-r2 / (2 * self.sigma ** 2)) * torch.exp(-t.clamp(min=0) / self.tau)
         return kernel
 
-    def read(self, ray_origin, ray_dir):
+    def read(
+        self,
+        ray_origin: torch.Tensor,
+        ray_dir: torch.Tensor,
+    ) -> torch.Tensor:
         B = ray_origin.shape[0]
         flat_grid = self.grid.view(-1, 3)
         mem = self.memory.view(-1, self.memory.shape[-1])
@@ -40,7 +49,13 @@ class MinimalHPM(torch.nn.Module):
             out.append(t)
         return torch.stack(out, dim=0)
 
-    def write(self, ray_origin, ray_dir, delta, alpha=1.0):
+    def write(
+        self,
+        ray_origin: torch.Tensor,
+        ray_dir: torch.Tensor,
+        delta: torch.Tensor,
+        alpha: float = 0.01,
+    ) -> None:
         B = ray_origin.shape[0]
         flat_grid = self.grid.view(-1, 3)
         mem = self.memory.view(-1, self.memory.shape[-1])
@@ -48,6 +63,7 @@ class MinimalHPM(torch.nn.Module):
             k = self.kernel(flat_grid, ray_origin[b], ray_dir[b])
             update = alpha * delta[b][None, :] * k[:, None]
             mem.data += update
+        pass
 
     def scan(self):
         Dx, Dy, Dz = self.memory.shape[:3]

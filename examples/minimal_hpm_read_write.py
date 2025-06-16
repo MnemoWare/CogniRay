@@ -15,6 +15,7 @@ torch.manual_seed(1337)
 # Step 00 | MSE: 0.989227
 # ...
 # Step 49 | MSE: 0.067038
+# Stable convergence.
 
 # Params
 B = 2048

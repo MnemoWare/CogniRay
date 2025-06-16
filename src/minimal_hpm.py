@@ -48,3 +48,51 @@ class MinimalHPM(torch.nn.Module):
             k = self.kernel(flat_grid, ray_origin[b], ray_dir[b])
             update = alpha * delta[b][None, :] * k[:, None]
             mem.data += update
+
+    def scan(self):
+        Dx, Dy, Dz = self.memory.shape[:3]
+        device = self.memory.device
+        faces = []
+
+        # +x
+        y, z = torch.meshgrid(torch.arange(Dy), torch.arange(Dz), indexing='ij')
+        origin = torch.stack([torch.zeros_like(y), y, z], dim=-1).reshape(-1, 3)
+        direction = torch.tensor([1.0, 0.0, 0.0], device=device).expand(origin.shape[0], 3)
+        faces.append((origin, direction))
+
+        # -x
+        origin = torch.stack([(Dx - 1) * torch.ones_like(y), y, z], dim=-1).reshape(-1, 3)
+        direction = torch.tensor([-1.0, 0.0, 0.0], device=device).expand(origin.shape[0], 3)
+        faces.append((origin, direction))
+
+        # +y
+        x, z = torch.meshgrid(torch.arange(Dx), torch.arange(Dz), indexing='ij')
+        origin = torch.stack([x, torch.zeros_like(x), z], dim=-1).reshape(-1, 3)
+        direction = torch.tensor([0.0, 1.0, 0.0], device=device).expand(origin.shape[0], 3)
+        faces.append((origin, direction))
+
+        # -y
+        origin = torch.stack([x, (Dy - 1) * torch.ones_like(x), z], dim=-1).reshape(-1, 3)
+        direction = torch.tensor([0.0, -1.0, 0.0], device=device).expand(origin.shape[0], 3)
+        faces.append((origin, direction))
+
+        # +z
+        x, y = torch.meshgrid(torch.arange(Dx), torch.arange(Dy), indexing='ij')
+        origin = torch.stack([x, y, torch.zeros_like(x)], dim=-1).reshape(-1, 3)
+        direction = torch.tensor([0.0, 0.0, 1.0], device=device).expand(origin.shape[0], 3)
+        faces.append((origin, direction))
+
+        # -z
+        origin = torch.stack([x, y, (Dz - 1) * torch.ones_like(x)], dim=-1).reshape(-1, 3)
+        direction = torch.tensor([0.0, 0.0, -1.0], device=device).expand(origin.shape[0], 3)
+        faces.append((origin, direction))
+
+        # Concatenate all rays
+        all_origins = torch.cat([f[0].to(device).float() for f in faces], dim=0)
+        all_dirs = torch.cat([f[1] for f in faces], dim=0)
+        all_dirs = all_dirs / all_dirs.norm(dim=-1, keepdim=True)
+
+        # Read batch
+        result = self.read(all_origins, all_dirs)
+
+        return result, all_origins, all_dirs

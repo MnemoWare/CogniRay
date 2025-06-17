@@ -42,10 +42,10 @@ This experiment builds on the noisy ray recovery protocol introduced in Experime
 
 ## Observed Results
 
-* Initial MSE: \~0.909
-* Final MSE after 50 steps: \~0.749
+* Initial MSE: ~0.889
+* Final MSE after 50 steps: ~0.748
 * Stable convergence observed, without divergence or collapse.
-* Final accuracy is comparable to Experiment 02 (Delta-Learning): final MSE \~0.720
+* Final accuracy is comparable to Experiment 02 (Delta-Learning): final MSE ~0.714
 
 ---
 

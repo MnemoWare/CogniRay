@@ -16,9 +16,9 @@ torch.manual_seed(1337)
 #   The details and interpretation of the experiment are described in: /docs/Experiment 03.md
 #
 # Result:
-#   Step 00 | MSE: 0.909172
+#   Step 00 | MSE: 0.889213
 #   ...
-#   Step 49 | MSE: 0.749940
+#   Step 49 | MSE: 0.748848
 #
 # Note:
 #   Slow, but stable convergence.

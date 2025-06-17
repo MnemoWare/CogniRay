@@ -22,6 +22,7 @@ This repository contains:
 **06/2025**:  
 - **Experiment 01**: HPM converges rapidly from zero to target projections under exact rays — validating core update mechanics.  
 - **Experiment 02**: HPM self-organizes from noise using only inferred projections — stable convergence, semantic drift, no backprop needed.  
+- **Experiment 03**: HPM supports classical SGD — matches delta-learning performance under noisy rays, confirming architectural compatibility.  
 
 ---
 

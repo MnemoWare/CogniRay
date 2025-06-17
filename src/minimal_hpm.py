@@ -40,7 +40,7 @@ class MinimalHPM(torch.nn.Module):
         t = (dx * ray_dir).sum(-1)
         x_proj = ray_origin + t[..., None] * ray_dir
         r2 = ((x - x_proj) ** 2).sum(-1)
-        kernel = torch.exp(-r2 / (2 * self.sigma ** 2)) * torch.exp(-t.clamp(min=0) / self.tau)
+        kernel = torch.exp(-r2 / (2 * self.sigma ** 2)) * torch.exp(-t.abs() / self.tau)
         return kernel
 
     def read(

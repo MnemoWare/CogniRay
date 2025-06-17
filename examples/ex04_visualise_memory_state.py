@@ -15,7 +15,7 @@ args = parser.parse_args()
 
 # Load memory state
 stage = str(args.stage).strip()
-data = torch.load(f"{script_dir}/data/ex04/stage_{stage}_memory_state.pt")
+data = torch.load(f"{script_dir}/data/ex04/stage_{stage}_memory_state.datarec.pt")
 memory = data["memory"].cpu()
 target_A = data["target_A"].cpu()
 target_B = data["target_B"].cpu()

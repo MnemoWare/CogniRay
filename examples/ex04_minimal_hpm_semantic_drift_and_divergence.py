@@ -75,7 +75,7 @@ def save_memory_state(
             target_A = target_A,
             target_B = target_B,
         ),
-        f=f"{script_dir}/data/ex04/{prefix + '_' if prefix is not None else ''}memory_state.pt",
+        f=f"{script_dir}/data/ex04/{prefix + '_' if prefix is not None else ''}memory_state.datarec.pt",
     )
 
 # Init mem

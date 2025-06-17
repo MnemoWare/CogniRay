@@ -18,7 +18,7 @@ torch.manual_seed(1337)
 # Result:
 #   Step 00 | MSE: 0.989227
 #   ...
-#   Step 49 | MSE: 0.067038
+#   Step 49 | MSE: 0.000352
 #
 # Note:
 #   Stable convergence.
@@ -31,7 +31,7 @@ side = 64
 steps = 50
 
 tau = 8.0
-sigma = 0.25
+sigma = 1.0
 alpha = 0.01
 
 device = 'cuda' if torch.cuda.is_available() else 'cpu'

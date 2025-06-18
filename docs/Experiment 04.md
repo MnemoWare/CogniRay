@@ -93,15 +93,55 @@ Notably, the compact difference kernel associated with projection B is visible e
 
 #### Illustration 1 — Memory Dynamics Over Time:
 
-![Illustration 1 — Memory Dynamics Over Time](files/ex04_stage_a_memory_dynamics.png)
+![Illustration 1 — Memory Dynamics Over Time (Stage A)](files/ex04_stage_a_memory_dynamics.png)
 
 This composite image shows the evolution of the memory field at selected steps (0, 7, 30, 49), highlighting the transition from noise to a clean semantic representation. Notably, it also demonstrates the **gradual assimilation of projection A** into the shared representational field. In this process, we observe how **constructive interference** leads to the compaction of representational structure within the memory space.
 
 #### Illustration 2 — Final State at Different Thresholds:
 
-![Illustration 2 — Final State at Different Thresholds](files/ex04_stage_a_memory_final_state.png)
+![Illustration 2 — Final State at Different Thresholds (Stage A)](files/ex04_stage_a_memory_final_state.png)
 
 The left panel uses a threshold of $10^{-3}$, showing the dominant shared semantic region. The right panel, with a lower threshold of $10^{-5}$, reveals **subtle traces along the path of projection A** — evidence of its gradual assimilation into the shared memory structure during Stage A.
+
+---
+
+### Stage B — Semantic Conflict and Divergent Restructuring
+
+In Stage B, the system confronts a semantic conflict: projection A remains unchanged, while projection B is reassigned an orthogonal target vector. Despite this, both beams retain their original, overlapping geometry. This deliberate clash serves to test HPM's ability to resolve contradictions without direct supervision or explicit memory separation.
+
+#### Dynamic Observations:
+
+* **Steps 01–03**: The memory field still holds remnants of the previous Stage A configuration. Projection B initially overlaps with the shared zone, but its target has changed. A's structure is preserved, while B's contribution is weak and incoherent.
+
+* **Step 04**: A turning point. A new semantic region begins to emerge away from the core of projection A, corresponding to the new orthogonal B target. The previous B signature gradually dissolves.
+
+* **Steps 05–07**: The memory begins to bifurcate. Two clear semantic centers form: one aligned with A (left), and one newly forming for B (right). Their geometry remains overlapping, but their semantic fields diverge.
+
+* **Step 50**: The separation is complete. Both targets are reliably represented in distinct topological zones within the memory. A shallow blend persists, but semantic identity is clearly polarized.
+
+#### Interpretation:
+
+* HPM does not overwrite old content, nor suppress conflicting input. Instead, it **restructures** its internal field to encode both goals in parallel.
+* The memory undergoes a **topological bifurcation** — a geometric redistribution of latent structure that maintains both representations within the same space.
+* The previous (aligned) B pattern is **not erased**, but naturally displaced by the orthogonal target through competitive reorganization.
+
+#### Memory Allocation Implications:
+
+* If projection B had been redirected through a spatially distinct path, divergence might have been avoided entirely.
+* This experiment suggests a principle: **semantically distinct goals should be projected through non-overlapping geometries** to avoid conflict and maintain long-term integrity.
+* HPM is resilient to conflict, but such adaptability introduces **temporary interference** and restructuring overhead.
+
+#### Illustration — Memory Dynamics:
+
+![Illustration 3 — Memory Dynamics Over Time (Stage B)](files/ex04_stage_b_memory_dynamics.png)
+
+This composite image shows the evolution of the memory field from Step 01 to Step 50, including the transitional conflict zone and emergence of distinct semantic cores.
+
+#### Illustration — Final State:
+
+![Illustration 4 — Final State at Different Thresholds (Stage B)](files/ex04_stage_b_memory_final_state.png)
+
+At high thresholds ($10^{-1}$, left), the two semantic poles appear clean and well-separated. At finer resolution ($10^{-2}$, right), a subtle shared substructure is revealed between them — confirming that HPM resolves conflict **not destructively, but through divergence**.
 
 ---
 

@@ -5,8 +5,8 @@
 The source code of the experiment is: /examples/ex04_minimal_hpm_semantic_drift_and_divergence.py  
 
 *Additional:*  
-The visualization code for the final memory field state at each phase if: /examples/ex04_visualise_memory_state.py  
-The visualization code for the memory dynamics at each phase if: /examples/ex04_visualise_memory_dynamic.py  
+The visualization code for the final memory field state at each phase is: /examples/ex04_visualise_memory_state.py  
+The visualization code for the memory dynamics at each phase iS: /examples/ex04_visualise_memory_dynamic.py  
 
 **Objective**
 

@@ -145,4 +145,4 @@ At high thresholds ($10^{-1}$, left), the two semantic poles appear clean and we
 
 ---
 
-(Stages B and C to follow.)
+(Stage C to follow.)

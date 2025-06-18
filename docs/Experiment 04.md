@@ -131,13 +131,13 @@ In Stage B, the system confronts a semantic conflict: projection A remains uncha
 * This experiment suggests a principle: **semantically distinct goals should be projected through non-overlapping geometries** to avoid conflict and maintain long-term integrity.
 * HPM is resilient to conflict, but such adaptability introduces **temporary interference** and restructuring overhead.
 
-#### Illustration — Memory Dynamics:
+#### Illustration 3 — Memory Dynamics:
 
 ![Illustration 3 — Memory Dynamics Over Time (Stage B)](files/ex04_stage_b_memory_dynamics.png)
 
 This composite image shows the evolution of the memory field from Step 01 to Step 50, including the transitional conflict zone and emergence of distinct semantic cores.
 
-#### Illustration — Final State:
+#### Illustration 4 — Final State:
 
 ![Illustration 4 — Final State at Different Thresholds (Stage B)](files/ex04_stage_b_memory_final_state.png)
 

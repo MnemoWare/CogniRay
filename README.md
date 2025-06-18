@@ -49,7 +49,7 @@ Read and write operations are implemented as **smooth, differentiable integrals*
 Conflicting updates do not overwrite but **diverge spatially**, forming distinct semantic regions. Benefits include:
 
 * Natural separation of contradictory memories
-* Elimination of catastrophic forgetting
+* Controllable avoidance of catastrophic forgetting
 * Self-organizing semantic clustering
 
 ### **Inference-Time Plasticity**

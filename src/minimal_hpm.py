@@ -74,6 +74,23 @@ class MinimalHPM(torch.nn.Module):
             mem.data += update
         pass
 
+    def write_suppressive(
+        self,
+        ray_origin: torch.Tensor,
+        ray_dir: torch.Tensor,
+        delta: torch.Tensor,
+        alpha: float = 0.01,
+    ) -> None:
+        B = ray_origin.shape[0]
+        flat_grid = self.grid.view(-1, 3)
+        mem = self.memory.view(-1, self.memory.shape[-1])
+        for b in range(B):
+            k = self.kernel(flat_grid, ray_origin[b], ray_dir[b])
+            update = alpha * delta[b][None, :] * k[:, None]
+            refresh = alpha * mem.data * k.max() + (k[:, None] * torch.sign(mem.data))
+            mem.data += (update**2 + refresh**2).sqrt() * update
+        pass
+
     def scan(self):
         Dx, Dy, Dz = self.memory.shape[:3]
         device = self.memory.device

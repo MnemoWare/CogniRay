@@ -36,11 +36,11 @@ To investigate how Holographic Projection Memory (HPM) reorganizes and adapts it
 
 * **Update Rule**:
 
-  * Delta-Learning is used throughout:
+  * Delta-Learning is used throughout:  
 
-    $$
-    W(x) \leftarrow W(x) + \alpha \cdot (T^*(u) - T(u)) \cdot K(x, \ell_u)
-    $$
+$$
+W(x) \leftarrow W(x) + \alpha \cdot (T^*(u) - T(u)) \cdot K(x, \ell_u)
+$$
 
 * **Stage A (Coherent Phase)**:
 

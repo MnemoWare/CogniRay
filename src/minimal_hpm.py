@@ -59,13 +59,20 @@ class MinimalHPM(torch.nn.Module):
             out.append(t)
         return torch.stack(out, dim=0)
 
-    def write(
+    def write_delta(
         self,
         ray_origin: torch.Tensor,
         ray_dir: torch.Tensor,
         delta: torch.Tensor,
         alpha: float = 0.01,
     ) -> None:
+        """
+        Basic delta-projection update.
+
+        Directly applies delta-weighted projections to the memory field without any filtering or suppression.
+        Suitable for initial learning phases or unconditional memory injection.
+        """
+        
         B = ray_origin.shape[0]
         flat_grid = self.grid.view(-1, 3)
         mem = self.memory.view(-1, self.memory.shape[-1])
@@ -75,13 +82,20 @@ class MinimalHPM(torch.nn.Module):
             mem.data += update
         pass
 
-    def write_suppressive(
+    def write_force(
         self,
         ray_origin: torch.Tensor,
         ray_dir: torch.Tensor,
         delta: torch.Tensor,
         alpha: float = 0.01,
     ) -> None:
+        """
+        Aggressive suppressive update.
+
+        Combines update and memory field strength to amplify strong activations and suppress weak ones.
+        Does not perform alignment checks. Useful for forced overwriting or aggressive consolidation.
+        """
+        
         B = ray_origin.shape[0]
         flat_grid = self.grid.view(-1, 3)
         mem = self.memory.view(-1, self.memory.shape[-1])
@@ -92,13 +106,21 @@ class MinimalHPM(torch.nn.Module):
             mem.data += (update**2 + refresh**2).sqrt() * update
         pass
 
-    def write_aligned_suppressive(
+    def write_associative(
         self,
         ray_origin: torch.Tensor,
         ray_dir: torch.Tensor,
         delta: torch.Tensor,
         alpha: float = 0.01,
     ) -> None:
+        """
+        Associative memory update.
+
+        Enhances aligned updates and suppresses conflicting ones by evaluating projection similarity
+        with existing memory content. Balances reinforcement and forgetting.
+        Ideal for contextual refinement and stable integration.
+        """
+        
         B = ray_origin.shape[0]
         flat_grid = self.grid.view(-1, 3)
         mem = self.memory.view(-1, self.memory.shape[-1])
@@ -123,13 +145,21 @@ class MinimalHPM(torch.nn.Module):
             mem.data += update_aligned
         pass
 
-    def write_aligned_suppressive_resistive(
+    def write_reflexive(
         self,
         ray_origin: torch.Tensor,
         ray_dir: torch.Tensor,
         delta: torch.Tensor,
         alpha: float = 0.01,
     ) -> None:
+        """
+        Reflexive memory update with resistance.
+
+        Updates memory only when the projection is aligned and coherent with existing content.
+        Incorporates environmental resistance to protect established structures.
+        Enables safe insertion of new knowledge without overwriting prior memories.
+        """
+
         B = ray_origin.shape[0]
         flat_grid = self.grid.view(-1, 3)
         mem = self.memory.view(-1, self.memory.shape[-1])

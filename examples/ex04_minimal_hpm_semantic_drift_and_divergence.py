@@ -112,7 +112,7 @@ for step in range(stage_A_steps):
         print(f"Stage A: step {step:02d} | MSE: {loss.item():.8f} | MSE A/B: {loss_A.item():.8f}/{loss_B.item():.8f}")
 
         delta = targets - projections
-        hpm.write(origins, directions, delta, stage_A_alpha)
+        hpm.write_delta(origins, directions, delta, stage_A_alpha)
 
         memory_dynamics_buffer.append(hpm.memory.data.clone().detach().cpu())
 
@@ -142,7 +142,7 @@ for step in range(stage_B_steps):
         print(f"Stage B: step {step:02d} | MSE: {loss.item():.8f} | MSE A/B: {loss_A.item():.8f}/{loss_B.item():.8f}")
 
         delta = targets - projections
-        hpm.write(origins, directions, delta, stage_B_alpha)
+        hpm.write_delta(origins, directions, delta, stage_B_alpha)
 
         memory_dynamics_buffer.append(hpm.memory.data.clone().detach().cpu())
 
@@ -179,7 +179,7 @@ for step in range(stage_C_steps):
     loss_B.backward()
 
     with torch.no_grad():
-        hpm.write(origins, directions, targets - projections, stage_C_alpha)
+        hpm.write_delta(origins, directions, targets - projections, stage_C_alpha)
     
     optimizer.step()
     optimizer.zero_grad()

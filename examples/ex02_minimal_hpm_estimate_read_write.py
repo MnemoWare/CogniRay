@@ -146,4 +146,4 @@ for step in range(steps):
         print(f"Step {step:02d} | MSE: {loss.item():.6f}")
 
         delta = targets.to(device) - projections
-        hpm.write(new_ray_origins.to(device), new_ray_dirs.to(device), delta, alpha)
+        hpm.write_delta(new_ray_origins.to(device), new_ray_dirs.to(device), delta, alpha)

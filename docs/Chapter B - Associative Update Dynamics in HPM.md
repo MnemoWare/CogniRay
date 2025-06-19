@@ -92,7 +92,11 @@ Thus, the system exhibits:
 
 The distributed nature of updates in HPM is not a flaw but an intentional mechanism of **semantic generalization** and **associative adaptation**.
 
-By encoding similarity through the geometry of projection kernels, memory corrections propagate to semantically relevant regions - resulting in behavior that is:
+By encoding similarity through the geometry of projection kernels, memory corrections propagate to semantically relevant regions.  
+
+> **Caveat:** While projection kernels focus updates toward semantically aligned regions, this mechanism does *not inherently prevent interference* when projections overlap. In high-density or misaligned cases, preserving older memories may require explicit divergence, scheduling, or suppressive update modes.  
+
+This results in behavior that is:  
 
 * Consistently modifiable
 * Contextually aware

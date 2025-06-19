@@ -209,8 +209,6 @@ This confirms that HPM supports seamless integration of gradient-based optimizat
 2. Resolve semantic interference through internal field reorganization (Stage B);
 3. Support gradient-based adaptation of projection geometry to avoid interference (Stage C).
 
----
-
 ### Stage A: Cooperative Encoding
 
 * Confirmed the formation of a **shared representational structure** under two compatible targets (A and B).
@@ -219,8 +217,6 @@ This confirms that HPM supports seamless integration of gradient-based optimizat
 
 This validates the *semantic compositionality* and reuse behavior of HPM under projection overlap with aligned targets.
 
----
-
 ### Stage B: Conflict and Divergence
 
 * Confirmed that when projection B was redefined as **orthogonal to A**, and geometry remained fixed, the memory underwent **topological bifurcation**.
@@ -228,8 +224,6 @@ This validates the *semantic compositionality* and reuse behavior of HPM under p
 * Through self-organization, the system reached a stable attractor in which both targets coexisted in **functionally distinct subfields**.
 
 This confirms that HPM resolves conflicting memory through **geometric restructuring**, not overwriting, consistent with the theoretical dynamics described in Chapter C.
-
----
 
 ### Stage C: Adaptive Drift
 

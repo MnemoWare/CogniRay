@@ -11,6 +11,8 @@ from src.minimal_hpm import MinimalHPM
 
 torch.manual_seed(1337)
 
+# Copyright 2025 (c) Konstantin Bashinsky
+# Licensed under the CogniRay Non-Commercial License v1.0
 #
 # Experiment 01:
 #   The details and interpretation of the experiment are described in: /docs/Experiment 01.md

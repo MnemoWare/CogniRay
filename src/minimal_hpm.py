@@ -1,4 +1,5 @@
 import torch
+import torch.nn.functional as F
 
 class MinimalHPM(torch.nn.Module):
     def __init__(
@@ -89,6 +90,37 @@ class MinimalHPM(torch.nn.Module):
             update = alpha * delta[b][None, :] * k[:, None]
             refresh = alpha * mem.data * k.max() + (k[:, None] * torch.sign(mem.data))
             mem.data += (update**2 + refresh**2).sqrt() * update
+        pass
+
+    def write_aligned_suppressive(
+        self,
+        ray_origin: torch.Tensor,
+        ray_dir: torch.Tensor,
+        delta: torch.Tensor,
+        alpha: float = 0.01,
+    ) -> None:
+        B = ray_origin.shape[0]
+        flat_grid = self.grid.view(-1, 3)
+        mem = self.memory.view(-1, self.memory.shape[-1])
+
+        for b in range(B):
+            k = self.kernel(flat_grid, ray_origin[b], ray_dir[b])
+            update = alpha * delta[b][None, :] * k[:, None]
+
+            refresh = alpha * mem.data * k.max() + (k[:, None] * torch.sign(mem.data))
+
+            refreshing_update = (update**2 + refresh**2).sqrt() * update
+
+            similarity = F.cosine_similarity(refreshing_update, mem.data, dim=-1, eps=1e-6).unsqueeze(-1)
+            alignment = (similarity + 1.0) / 2.0
+
+            significance = mem.data.norm(dim=-1, keepdim=True)
+            significance = significance / ((significance.max() + 1e-6) * alpha)
+            trustedness = alignment * significance
+
+            update_aligned = refreshing_update * trustedness
+
+            mem.data += update_aligned
         pass
 
     def scan(self):

@@ -80,7 +80,7 @@ HPM is not a drop-in replacement for existing architectures. Rather, it provides
 HPM is well-suited for:
 
 * **Perceptual systems**: Encoding and retrieving sensory fields with directionally selective access.
-* **Continual learning**: Incorporating new concepts without catastrophic forgetting.
+* **Continual learning**: Incorporating new concepts with projection-level plasticity and explicit mechanisms to mitigate catastrophic forgetting.
 * **Cognitive agents**: Supporting context-sensitive recall, active inference, and semantic modulation.
 * **Modular architectures**: Plug-and-play memory banks and symbolic-to-geometric translation.
 

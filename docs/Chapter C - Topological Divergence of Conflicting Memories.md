@@ -455,6 +455,11 @@ By constructing a chain of mathematical results - from projection kernels and in
 
 The divergence mechanism is not an artifact or exception; it is a **structural property** of the representational geometry induced by the projection mechanism. Through localized interactions and density-aware adjustments, the memory field remains both adaptable and resilient.
 
+> **Caveat on Forgetting:**  
+> While the divergence mechanism enables graceful reorganization under many conditions, it does **not universally prevent forgetting**. In scenarios where projection rays are nearly aligned or target overlapping memory zones, repulsive forces may be insufficient to drive separation. Without sufficient spatial or angular separation — or without supplemental mechanisms such as reactivation, suppression, or projection scheduling — **interference can still degrade prior representations**.  
+> Divergence is a *powerful capacity*, but not a *guarantee*; it depends on geometry, not magic.  
+
+
 This behavior implies that DyNA's memory does not merely store data - it **responds**, **reshapes**, and **defends conceptual integrity** in the face of novelty or contradiction.
 
 In classical systems, error leads to erasure. In HPM, error becomes force - and force reshapes the space.

@@ -629,6 +629,8 @@ This structure can be exploited to construct **multi-angle projection ensembles*
 
 > These results extend the stability theorems of Chapter C to directional scenarios - showing that geometric and angular information jointly shape the evolution of distributed memory structures.
 
+> **Note on Forgetting:** While HPM introduces a projection-based update mechanism that is spatially localized and conflict-resilient, **it does not inherently prevent catastrophic forgetting**. If multiple projection rays target overlapping memory regions without explicit replay or structural separation, older memories may be gradually overwritten. To preserve long-term information, the system may require **reactivation of past projections**, **suppressive update schemes**, or **explicit memory partitioning**. HPM provides the *tools* for continual learning — but **stability must be architected, not assumed**.
+
 ---
 
 ## D.8 Practical Implementation Notes

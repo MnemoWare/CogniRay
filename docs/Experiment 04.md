@@ -187,7 +187,7 @@ In Stage C, the experiment shifts focus to **semantic drift** - the system’s a
 
 ![Illustration 5 - Memory Dynamics Over Time (Stage C)](files/ex04_stage_c_memory_dynamics.png)
 
-Visualizations of the memory field and ray B's evolving geometry will demonstrate how the system adapts to encode an orthogonal target without explicit supervision.
+Visualizations of the memory field and ray B's evolving geometry demonstrate how the system adapts to encode an orthogonal target without explicit supervision.
 
 #### Summary and Conclusion of Stage C:
 

@@ -9,19 +9,24 @@ project_dir = os.path.dirname(script_dir)
 sys.path.append(project_dir)
 
 parser = argparse.ArgumentParser(description="Experiment 05 visualization (memory dynamics)")
-parser.add_argument("--threshold", help="Visualisation threshold", required=False, default=1.0e-2, type=float)
+parser.add_argument("--threshold", help="Visualisation threshold", required=False, default=7.5e-3, type=float)
 args = parser.parse_args()
 
 # Load memory state
-data = torch.load(f"{script_dir}/data/ex05/05b_stage_a_dynamics_memory_state.datarec.pt")
+data = torch.load(f"{script_dir}/data/ex05/05_stage_b_dynamics_memory_state.datarec.pt")
 memory = data["memory"].cpu()
 target_A = data["target_A"].cpu()
+target_other = data["target_other"].cpu()
 
 # Scalar density
 density_a = (memory * target_A.view(1, 1, 1, 1, -1)).abs().sum(dim=-1)
+density_other = (memory.unsqueeze(0) * target_other.view(target_other.shape[0], 1, 1, 1, 1, -1)).abs().sum(dim=-1)
+density_other = density_other.mean(dim=0)
 
 # Normalize density
-heat = density_a / (density_a.max() + 1e-8)
+density_a = density_a / (density_a.max() + 1e-8) * -1.0
+density_other = density_other / (density_other.max() + 1e-8)
+heat = density_a + density_other
 heat = heat / heat.abs().max()
 
 # Prepare heatmap
@@ -63,8 +68,8 @@ for t in timesteps:
             opacity=0.8,
             colorbar=dict(
                 title="Semantic Affinity",
-                tickvals=[0.0, 1.0],
-                ticktext=["Initial noise", "Zone A"]
+                tickvals=[0.0, 0.5, 1.0],
+                ticktext=["Zone A", "Blend", "Zone other"]
             ),
         ),
         name=f"Step {t}"

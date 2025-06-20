@@ -20,14 +20,14 @@ torch.manual_seed(1337)
 #   The details and interpretation of the experiment are described in: /docs/Experiment 05.md
 #
 # Result - Stage A:
-#   Stage A: step 00 | MSE: 0.83475214
+#   Stage A: step 00 | MSE: 0.84024251
 #   ...
-#   Stage A: step 49 | MSE: 0.00000150
+#   Stage A: step 24 | MSE: 0.00002203
 #
 # Result - Stage B:
-#   Stage B: step 00 | MSE: 0.93774348 | MSE A/other: 0.00000114/1.17217910
+#   Stage B: step 00 | MSE: 0.93652594 | MSE A/other: 0.00001419/1.17065382
 #   ...
-#   Stage B: step 49 | MSE: 0.00072222 | MSE A/other: 0.00076294/0.00071204
+#   Stage B: step 49 | MSE: 0.26311699 | MSE A/other: 0.00003501/0.32888746
 #
 
 # Params
@@ -36,15 +36,15 @@ side = 64
 
 # Stage A params
 stage_A_alpha = 0.005
-stage_A_steps = 50
+stage_A_steps = 25
 
 # Stage B params
-stage_B_alpha_delta = 0.005
-stage_B_steps_delta = 50
+stage_B_alpha_suppresive = 0.001
+stage_B_steps_suppresive = 50
 
 # Global params
 tau = 8.0
-sigma = 1.0
+sigma = 1.25
 eps = 1.0e-3
 
 device = 'cuda' if torch.cuda.is_available() else 'cpu'
@@ -61,7 +61,7 @@ def save_memory_state(
             target_A = target_A,
             target_other = target_other,
         ),
-        f=f"{script_dir}/data/ex05/05c_{prefix + '_' if prefix is not None else ''}memory_state.datarec.pt",
+        f=f"{script_dir}/data/ex05/05_{prefix + '_' if prefix is not None else ''}memory_state.datarec.pt",
     )
 
 # Init mem
@@ -70,7 +70,9 @@ hpm = MinimalHPM(
     channels=channels,
     tau=tau,
     sigma=sigma,
-    init=False,
+    init=True,
+    init_mean=0.0,
+    init_std=1.0e-3,
 ).to(device)
 
 # Fixed random targets
@@ -98,7 +100,6 @@ for step in range(stage_A_steps):
         memory_dynamics_buffer.append(hpm.memory.data.clone().detach().cpu())
 
 memory_dynamics_buffer = torch.stack(memory_dynamics_buffer, dim=0)
-save_memory_state(hpm.memory.data, ray_A_target.data, None, "stage_a")
 save_memory_state(memory_dynamics_buffer, ray_A_target.data, None, "stage_a_dynamics")
 
 # Stage B:
@@ -122,7 +123,7 @@ memory_dynamics_buffer = []
 memory_dynamics_buffer.append(hpm.memory.data.clone().detach().cpu()) # Last state
 
 print("Begin Stage B: project four random targets into overlapping region. Do not update A.")
-for step in range(stage_B_steps_delta):
+for step in range(stage_B_steps_suppresive):
     with torch.no_grad():
         origins = torch.cat([ray_A_origin.unsqueeze(0), ray_other_origin], dim=0)
         directions = torch.cat([ray_A_direction.unsqueeze(0), ray_other_direction], dim=0)
@@ -135,10 +136,9 @@ for step in range(stage_B_steps_delta):
         print(f"Stage B: step {step:02d} | MSE: {loss.item():.8f} | MSE A/other: {loss_A.item():.8f}/{loss_other.item():.8f}")
 
         delta = targets - projections
-        hpm.write_delta(origins[1:], directions[1:], delta[1:], stage_B_alpha_delta)
+        hpm.write_suppresive(origins[1:], directions[1:], delta[1:], stage_B_alpha_suppresive)
 
         memory_dynamics_buffer.append(hpm.memory.data.clone().detach().cpu())
 
 memory_dynamics_buffer = torch.stack(memory_dynamics_buffer, dim=0)
-save_memory_state(hpm.memory.data, ray_A_target.data, ray_other_target.data, "stage_b")
 save_memory_state(memory_dynamics_buffer, ray_A_target.data, ray_other_target.data, "stage_b_dynamics")

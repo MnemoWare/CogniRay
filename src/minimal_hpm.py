@@ -85,7 +85,7 @@ class MinimalHPM(torch.nn.Module):
             mem.data += update
         pass
 
-    def write_force(
+    def write_suppresive(
         self,
         ray_origin: torch.Tensor,
         ray_dir: torch.Tensor,
@@ -93,10 +93,10 @@ class MinimalHPM(torch.nn.Module):
         alpha: float = 0.01,
     ) -> None:
         """
-        Aggressive suppressive update.
+        Suppressive update.
 
-        Combines update and memory field strength to amplify strong activations and suppress weak ones.
-        Does not perform alignment checks. Useful for forced overwriting or aggressive consolidation.
+        Combines update and current memory field state to amplify already known features.
+        Useful for gentle overwriting and consolidation.
         """
         
         B = ray_origin.shape[0]

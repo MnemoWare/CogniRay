@@ -37,7 +37,6 @@ side = 64
 # Stage A params
 stage_A_alpha = 0.005
 stage_A_steps = 50
-stage_A_targets_delta = 0.25
 
 # Stage B params
 stage_B_alpha_delta = 0.005

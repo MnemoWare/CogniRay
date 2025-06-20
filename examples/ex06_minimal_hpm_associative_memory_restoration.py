@@ -40,7 +40,6 @@ side = 64
 # Stage A params
 stage_A_alpha = 0.005
 stage_A_steps = 50
-stage_A_targets_delta = 0.25
 
 # Stage B params
 stage_B_alpha_delta = 0.005
@@ -85,7 +84,7 @@ ray_B_origin = torch.tensor([side//2, side//2-side//16, side//2], device=device,
 ray_A_direction = F.normalize(torch.tensor([+1.0, +1.0, +0.5], device=device) + eps, dim=0)
 ray_B_direction = F.normalize(torch.tensor([+1.0, -1.0, +0.5], device=device) + eps, dim=0)
 ray_A_target = torch.randn([channels], device=device)
-ray_B_target = torch.lerp(ray_A_target, torch.randn([channels], device=device), stage_A_targets_delta)
+ray_B_target = torch.randn([channels], device=device)
 
 # Stage A: 
 memory_dynamics_buffer = []

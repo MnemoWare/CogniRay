@@ -58,7 +58,7 @@ $$
 T = \int_{\mathbb{R}^N} W(x) \cdot K(x, \ell) \, dx
 $$
 
-Upon receiving a target response $T^\*$ , the projection error is defined as $\delta = T^* - T$. The memory field is then updated to reduce this error by distributing it spatially through the kernel. The update rule is:
+Upon receiving a target response $T^*$ , the projection error is defined as $\delta = T^* - T$. The memory field is then updated to reduce this error by distributing it spatially through the kernel. The update rule is:
 
 $$
 \Delta W(x) = \alpha \cdot \mathcal{F}(x; \delta, W(x), K(x, \ell))
@@ -283,7 +283,7 @@ We summarize the four regimes below:
 
 ### Gradient of Selectivity and Protection
 
-The transition from $\mathcal{F}\_\mathrm{delta}$ to $\mathcal{F}\_\mathrm{refl}$ represents a progressive shift:
+The transition from $\mathcal{F}_\mathrm{delta}$ to $\mathcal{F}_\mathrm{refl}$ represents a progressive shift:
 
 * From raw, unfiltered updates to highly modulated and context-aware adjustments;
 * From uniform injection to spatially differentiated response based on alignment and trust;
@@ -291,8 +291,8 @@ The transition from $\mathcal{F}\_\mathrm{delta}$ to $\mathcal{F}\_\mathrm{refl}
 
 This hierarchy enables memory systems to operate in multiple regimes of learning:
 
-* **Plastic** ($\mathcal{F}\_\mathrm{delta}$, $\mathcal{F}\_\mathrm{sup}$) — useful during early-stage adaptation or structural initialization;
-* **Stable** ($\mathcal{F}\_\mathrm{assoc}$, $\mathcal{F}\_\mathrm{refl}$) — required for consolidation, safe incremental integration, and long-term memory integrity.
+* **Plastic** ($\mathcal{F}_\mathrm{delta}$, $\mathcal{F}_\mathrm{sup}$) — useful during early-stage adaptation or structural initialization;
+* **Stable** ($\mathcal{F}_\mathrm{assoc}$, $\mathcal{F}_\mathrm{refl}$) — required for consolidation, safe incremental integration, and long-term memory integrity.
 
 ### Formal Implication
 
@@ -302,6 +302,6 @@ $$
 \forall x, \lVert\mathcal{F}_i(x)\rVert \geq \lVert\mathcal{F}_j(x)\rVert \implies \mathcal{F}_i \text{ permits more aggressive modification than } \mathcal{F}_j.
 $$
 
-This defines a partial ordering over the family $\{ \mathcal{F}\_\mathrm{delta}, \mathcal{F}\_\mathrm{sup}, \mathcal{F}\_\mathrm{assoc}, \mathcal{F}\_\mathrm{refl} \}$ by increasing restrictiveness and memory preservation.
+This defines a partial ordering over the family $\{ \mathcal{F}_\mathrm{delta}, \mathcal{F}_\mathrm{sup}, \mathcal{F}_\mathrm{assoc}, \mathcal{F}_\mathrm{refl} \}$ by increasing restrictiveness and memory preservation.
 
 In summary, the architecture of $\mathcal{F}$ determines not only the dynamics of learning but also the epistemic boundary between adaptation and preservation. By appropriately selecting or combining these modulation regimes, one can tailor projection-based memory systems for robustness, efficiency, or flexibility across learning domains.

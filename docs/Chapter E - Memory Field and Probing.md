@@ -45,9 +45,9 @@ Here, $x \in \mathbb{R}^N$ represents a spatial coordinate in an $N$-dimensional
 
 ---
 
-#### Discrete Representation
+#### Discrete Representation  
 
-In practice, the continuous field $W(x)$ is realized as a discretized tensor:
+In practice, the continuous field $W(x)$ is realized as a discretized tensor:  
 
 $$
 W[x] \in \mathbb{R}^{D_1 \times D_2 \times \dots \times D_N \times C},
@@ -65,7 +65,7 @@ Interpolation techniques (e.g., trilinear or kernel-based) may be used to recove
 
 ---
 
-#### Role of the Channel Space $\mathbb{R}^C$
+#### Role of the Channel Space $\mathbb{R}^C$  
 
 Each memory value $W(x) \in \mathbb{R}^C$ is a vector of latent components or channels. The dimensionality $C$ is not fixed by geometry, and is instead chosen based on the expressiveness required by the application:
 
@@ -76,7 +76,7 @@ The interpretation of channels is model-dependent, but generally assumed to be d
 
 ---
 
-#### Spatial Reference and Alignment
+#### Spatial Reference and Alignment  
 
 The memory field $W$ is embedded in a shared ambient coordinate system $\mathbb{R}^N$, which is also used to define projection rays $\ell_u(t) = \Phi(u) + t \cdot \mathbf{v}_u$. All geometric constructs (projection surfaces, rays, attenuation kernels) operate within this space, ensuring full differentiability and compatibility with kernel-based integration schemes.
 
@@ -84,7 +84,7 @@ The origin, orientation, and extent of $W$ are not constrained by the model. Mem
 
 ---
 
-#### Trainability and Dynamic Update
+#### Trainability and Dynamic Update  
 
 The memory tensor $W[x]$ is generally **trainable**, and may be updated:
 
@@ -101,7 +101,7 @@ The locality of the projection kernel $K$ ensures that updates only affect regio
 
 ---
 
-#### Interpretability and Modularity
+#### Interpretability and Modularity  
 
 Because $W$ is defined over a spatial lattice with fixed indexing and structured semantics, its internal organization can be visualized, monitored, and analyzed. This interpretability is essential for:
 
@@ -113,7 +113,7 @@ In summary, the memory field $W(x)$ in HPM acts as a structured, high-capacity, 
 
 ---
 
-### E.2 Projection Rays and Probing Protocol
+### E.2 Projection Rays and Probing Protocol  
 
 Information stored in the HPM memory field is not accessed through discrete indexing or content-based similarity, but rather via structured geometric **probing** - the process of integrating semantic contributions along **directed rays** that traverse the memory volume. These rays originate from a projection surface embedded in the ambient space and are parameterized by coordinates $u \in \mathbb{R}^{N-1}$.
 
@@ -123,13 +123,13 @@ This section formalizes the construction of projection rays, introduces conventi
 
 ---
 
-#### E.2.1 Ray Construction and Notation
+#### E.2.1 Ray Construction and Notation  
 
 In the Holographic Projection Memory (HPM) framework, access to the memory field $W(x)$ is mediated by directed probing rays that originate from a projection hypersurface and traverse the ambient memory space $\mathbb{R}^N$. Each ray is defined in terms of a projection coordinate $u \in \mathbb{R}^{N-1}$, which indexes a location on the $(N-1)$-dimensional projection surface $\mathcal{P}$.
 
 ---
 
-**Ray Parameterization**
+**Ray Parameterization**  
 
 Given a differentiable mapping $\Phi : \mathbb{R}^{N-1} \rightarrow \mathbb{R}^N$, the ray corresponding to coordinate $u$ is defined as:
 
@@ -151,13 +151,13 @@ $$
 
 ---
 
-**Geometric Role**
+**Geometric Role**  
 
 Each ray $\ell_u(t)$ defines a line in $\mathbb{R}^N$ along which contributions from the memory field are aggregated. The ray acts as a **semantic probe**, aligned along direction $\mathbf{v}_u$ and rooted at surface point $\Phi(u)$. Only points in the vicinity of this ray contribute meaningfully to the projection, due to the localized nature of the projection kernel $K(x, \ell_u)$.
 
 ---
 
-**Kernel Decomposition**
+**Kernel Decomposition**  
 
 The contribution of a memory point $x \in \mathbb{R}^N$ to the projection associated with $\ell_u$ is modulated by a kernel function $K(x, \ell_u)$, defined as a product of two components:
 
@@ -185,7 +185,7 @@ where:
 
 ---
 
-**Exponential Attenuation**
+**Exponential Attenuation**  
 
 The default attenuation model is exponential decay with a ray-specific attenuation parameter $\tau_u > 0$:
 
@@ -203,13 +203,13 @@ This directional and attenuated formulation of projection rays enables localized
 
 ---
 
-#### E.2.2 Generalizations and Operational Conventions
+#### E.2.2 Generalizations and Operational Conventions  
 
 The ray construction framework introduced in Section E.2.1 supports a variety of generalizations and implementation conventions that allow for flexible trade-offs between expressiveness, efficiency, and differentiability. These choices influence how rays interact with the memory field and are critical for designing practical HPM systems.
 
 ---
 
-**Bidirectional Emission**
+**Bidirectional Emission**  
 
 By default, each projection coordinate $u \in \mathbb{R}^{N-1}$ emits a **single ray** $\ell_u(t) = \Phi(u) + t \cdot \mathbf{v}_u$, with $t \geq 0$. However, the system can optionally be configured for **bidirectional emission**, where both forward and backward rays are evaluated:
 
@@ -239,7 +239,7 @@ This approach is especially powerful when the projection surface is narrow or sp
 
 ---
 
-**Fixed vs. Learnable Parameters**
+**Fixed vs. Learnable Parameters**  
 
 The ray definition depends on two key quantities:
 
@@ -248,14 +248,14 @@ The ray definition depends on two key quantities:
 
 These may be treated as **fixed hyperparameters** or **learnable functions**.
 
-**Fixed configuration:**
+**Fixed configuration:**  
 
 * $\mathbf{v}_u = \mathbf{v}$ for all $u$, with $\mathbf{v} \in \mathbb{R}^N, \|\mathbf{v}\|_2 = 1$
 * $\tau_u = \tau \in \mathbb{R}_{>0}$
 
 This mode supports high-performance implementations (e.g., ray caching, rasterized traversal) and simpler batching.
 
-**Learnable configuration:**
+**Learnable configuration:**  
 
 * $\mathbf{v}_u = \mathbf{v}(u)$ or sampled from a learnable codebook: $\mathbf{v}_u = \sum_k a_k(u) \cdot \mathbf{v}_k$
 * $\tau_u = \tau(u)$, either directly predicted or derived from local features
@@ -264,7 +264,7 @@ Learnable variants enhance flexibility and allow the system to adapt its field-o
 
 ---
 
-**Convention Flags**
+**Convention Flags**  
 
 To simplify experimentation and implementation, a set of **convention flags** is defined to control ray behavior:
 
@@ -276,7 +276,7 @@ These flags are **not semantic constraints**, but **engineering heuristics** tha
 
 ---
 
-**Modularity vs. Trainability**
+**Modularity vs. Trainability**  
 
 The choice between fixed and adaptive ray parameters reflects a deeper trade-off:
 
@@ -293,13 +293,13 @@ This modular design ensures that HPM can operate across a spectrum of regimes - 
 
 ---
 
-### E.3 Entry–Exit Clipping and Ray Activation
+### E.3 Entry–Exit Clipping and Ray Activation  
 
 In the context of Holographic Projection Memory (HPM), not all rays are guaranteed to intersect with the memory field. To ensure computational and semantic validity of each projection, rays must be clipped to the valid bounds of the memory region. This section describes the use of geometric intersection logic to define the activation domain of rays and introduces optional attenuation clipping strategies.
 
 ---
 
-#### Ray–AABB Intersection
+#### Ray–AABB Intersection  
 
 Let the memory field $W(x)$ be defined over a compact hyperrectangular region (axis-aligned bounding box, or AABB) in $\mathbb{R}^N$. The projection ray $\ell_u(t) = \Phi(u) + t \cdot \mathbf{v}_u$ is evaluated only within this region.
 
@@ -324,7 +324,7 @@ and can be efficiently computed using branchless slab methods (e.g., inverse dir
 
 ---
 
-#### Conditional Ray Validity
+#### Conditional Ray Validity  
 
 Rays that do not intersect the memory region are considered **inactive** and excluded from projection computation. Formally, a ray is active if:
 
@@ -344,7 +344,7 @@ This conditional gating also supports efficient batching, as inactive rays can b
 
 ---
 
-#### Clipped Attenuation (Optional)
+#### Clipped Attenuation (Optional)  
 
 In the standard projection formulation, longitudinal attenuation is given by:
 
@@ -370,13 +370,13 @@ In summary, entry–exit clipping defines the valid support of each ray within t
 
 ---
 
-### E.4 Discrete Rasterization of Rays
+### E.4 Discrete Rasterization of Rays  
 
 To enable efficient projection in discretized memory fields, continuous ray integration can be approximated using discrete traversal schemes. This section formalizes the rasterized version of ray sampling, outlines its implementation via voxel stepping, and discusses its compatibility with differentiable learning objectives.
 
 ---
 
-#### Voxel-Based Approximation
+#### Voxel-Based Approximation  
 
 Let $W[x] \in \mathbb{R}^{D_1 \times \cdots \times D_N \times C}$ denote the discretized memory field defined over a regular $N$-dimensional voxel grid. Instead of evaluating the continuous projection integral
 
@@ -402,7 +402,7 @@ Here:
 
 ---
 
-#### Bresenham-Style Traversal
+#### Bresenham-Style Traversal  
 
 The voxel path $\{x_i\}$ is computed using a grid-based traversal algorithm. A common choice is **Bresenham's algorithm** (or its N-dimensional generalizations), which enumerates the set of voxels intersected by a ray in a deterministic, integer-arithmetic fashion.
 
@@ -416,7 +416,7 @@ The initial entry point $x_1$ is determined from the intersection of $\ell_u$ wi
 
 ---
 
-#### Approximate Distance and Step Length
+#### Approximate Distance and Step Length  
 
 Although Bresenham-style traversal is discrete, the **geometry of the ray is preserved** through analytical reconstruction. For each $x_i$, one may compute:
 
@@ -442,7 +442,7 @@ This preserves compatibility with the continuous projection kernel $K$, while ma
 
 ---
 
-#### Gradient Compatibility (See Q14)
+#### Gradient Compatibility (See Q14)  
 
 Although the voxel stepping path $\{x_i\}$ is inherently non-differentiable, the projection computation can remain differentiable with respect to ray geometry by **reconstructing $t_i$ and $d_\perp$ analytically**.
 
@@ -460,7 +460,7 @@ In summary, discrete rasterization of rays enables practical and efficient trave
 
 ---
 
-### E.5 Beam Width Strategies (Unified Section)
+### E.5 Beam Width Strategies (Unified Section)  
 
 The effective spatial influence of each projection ray in HPM is governed not only by its direction and attenuation, but also by its **beam width** - the extent to which nearby memory voxels contribute to the projection. This section outlines alternative strategies for controlling beam width, addressing both lateral and longitudinal integration behavior.
 
@@ -474,13 +474,13 @@ These strategies offer complementary trade-offs between resolution, efficiency, 
 
 ---
 
-#### E.5.1 Projection-Surface-Based Convolution (Preferred)
+#### E.5.1 Projection-Surface-Based Convolution (Preferred)  
 
 In the projection-surface-based convolution scheme, beam widening is not realized by integrating over an expanded volume around the ray path, but rather through a **post-projection convolution** over neighboring rays on the projection surface. This method is computationally efficient, compatible with rasterized implementations, and preserves gradient flow through well-structured tensor operations.
 
 ---
 
-**Formulation**
+**Formulation**  
 
 Let $T(u) \in \mathbb{R}^C$ denote the projection response associated with a coordinate $u \in \mathbb{R}^{N-1}$ on the projection surface. The convolved output $\widetilde{T}(u)$ is computed as:
 
@@ -498,7 +498,7 @@ This convolution defines a **lateral beam profile** across the projection surfac
 
 ---
 
-**Applicability Constraints**
+**Applicability Constraints**  
 
 Projection-surface-based convolution requires that rays corresponding to neighboring surface points $u + s$ share the **same direction vector** $\mathbf{v}_u$ and attenuation $\tau_u$, or at least vary smoothly across $u$. This ensures that the projections $T(u + s)$ are geometrically aligned and meaningfully composable.
 
@@ -518,7 +518,7 @@ Such configurations arise naturally when using `fixed_v_convention` and `fixed_t
 
 ---
 
-**Computational and Differentiable Advantages**
+**Computational and Differentiable Advantages**  
 
 This strategy offers several important benefits:
 
@@ -534,13 +534,13 @@ In summary, projection-surface-based convolution provides an efficient and diffe
 
 ---
 
-#### E.5.2 Memory-Volume-Based Sampling (Alternative)
+#### E.5.2 Memory-Volume-Based Sampling (Alternative)  
 
 In settings where rays exhibit heterogeneous geometry - such as varying direction vectors $\mathbf{v}_u$ or adaptive emission across the projection surface - projection-surface-based convolution becomes inadequate due to misalignment between neighboring rays. In such cases, beam widening may instead be achieved via **direct convolution over memory voxels** in the vicinity of each ray path. This approach trades computational efficiency for geometric precision and is recommended only when lateral coherence across rays cannot be assumed.
 
 ---
 
-**Beam Widening via Local Memory Convolution**
+**Beam Widening via Local Memory Convolution**  
 
 Let $\ell_u(t) = \Phi(u) + t \cdot \mathbf{v}_u$ denote the ray associated with coordinate $u$. The memory-volume-based method augments the projection operation by integrating over a local neighborhood around the ray path:
 
@@ -554,7 +554,7 @@ This approach can be seen as applying a **cross-sectional blur** orthogonal to t
 
 ---
 
-**Discrete Implementation**
+**Discrete Implementation**  
 
 In rasterized form, the beam widening is implemented as a convolution over a voxel neighborhood around each ray step $x_i \in \mathbb{Z}^N$:
 
@@ -572,7 +572,7 @@ This 2-stage kernel (transverse convolution followed by axial integration) enhan
 
 ---
 
-**Trade-Offs and Use Cases**
+**Trade-Offs and Use Cases**  
 
 While memory-volume-based sampling provides better geometric fidelity for non-parallel or context-modulated rays, it incurs higher computational and memory overhead:
 
@@ -592,13 +592,13 @@ In conclusion, memory-volume-based sampling enables accurate beam widening in se
 
 ---
 
-### E.6 Support for Arbitrary Dimensions
+### E.6 Support for Arbitrary Dimensions  
 
 The HPM framework is designed to operate in arbitrary spatial dimensionality, provided that the memory and projection geometries satisfy basic compatibility constraints. All core operations, including projection ray construction, kernel evaluation, and memory interaction, are defined for general $N \geq 2$, with consistent generalization to higher dimensions.
 
 ---
 
-#### Memory Field Definition
+#### Memory Field Definition  
 
 Let $N \in \mathbb{N}$, $N \geq 2$. The memory field is defined over an $N$-dimensional voxel grid:
 
@@ -616,7 +616,7 @@ via interpolation or local smoothing kernels.
 
 ---
 
-#### Projection Surface and Ray Geometry
+#### Projection Surface and Ray Geometry  
 
 The projection surface $\mathcal{P}$ is a differentiable $(N-1)$-dimensional manifold embedded in $\mathbb{R}^N$, parameterized by:
 
@@ -628,7 +628,7 @@ Each coordinate $u \in \mathbb{R}^{N-1}$ indexes a location on the surface, and 
 
 ---
 
-#### Dimensional Consistency of Kernels
+#### Dimensional Consistency of Kernels  
 
 All kernels and geometric terms are defined in dimension-independent form:
 
@@ -654,7 +654,7 @@ These expressions involve only Euclidean inner products and norms, and are valid
 
 ---
 
-#### Implementation Considerations
+#### Implementation Considerations  
 
 While the mathematical formulation permits arbitrary $N$, practical implementations are typically constrained to:
 

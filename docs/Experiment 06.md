@@ -45,7 +45,7 @@ where $\sigma = 1.5$ and $\tau = 4.0$.
 Two fixed projection beams are used:
 
 * **Beam A**: Defined by origin $o_A$ and direction $v_A$, assigned a fixed random target $T^*_A \in \mathbb{R}^C$.
-* **Beam B**: Defined by origin $o_B$ and direction $v_B$, initially assigned an orthogonal target $T^\*\_B \in \mathbb{R}^C$ such that $\langle T^\*_A, T^\*_B \rangle = 0$.
+* **Beam B**: Defined by origin $o_B$ and direction $v_B$, initially assigned an orthogonal target $T^*_B \in \mathbb{R}^C$ such that $\langle T^*_A, T^*_B \rangle = 0$.
 
 The beams are constructed to intersect within the memory volume to ensure semantic conflict.
 
@@ -75,7 +75,7 @@ where $U'(x)$ is the combined update vector and $A(x)$ is a scalar trust coeffic
 Throughout both phases, the projection errors for A and B are recorded at each step:
 
 $$
-\text{MSE}_A = \lVert T_A - T^*_A \rVert _2^2, \quad \text{MSE}_B = \lVert T_B - T^\*_B \rVert _2^2.
+\text{MSE}_A = \lVert T_A - T^*_A \rVert _2^2, \quad \text{MSE}_B = \lVert T_B - T^*_B \rVert _2^2.
 $$
 
 The system is monitored for signs of restoration of $T^*_A$ during Stage B, despite the absence of any direct updates using beam A.
@@ -96,11 +96,11 @@ This behavior indicates spontaneous memory restoration. Meanwhile, $\text{MSE}_B
 
 **Figure 1: Log-Scale Loss Curves**  
 ![Illustration 1 - Loss Dynamics](files/ex06_loss_logarithmic_scale.png)  
-> Mean squared errors $\text{MSE}\_A$ and $\text{MSE}\_B$ plotted over all steps using logarithmic scaling to highlight subtle dynamics.
+Mean squared errors $\text{MSE}_A$ and $\text{MSE}_B$ plotted over all steps using logarithmic scaling to highlight subtle dynamics.
 
 ### Spatial Projection and Memory State
 
-At the point of maximal restoration (step 107), a 3D visualization of the memory field $W(x)$ shows distinct semantic traces along both beams. Beam A's pathway, which had previously faded, exhibits reemerging structure aligned with the original target $T^\*_A$. This occurs despite $T^\*_A$ being excluded from the update rule after step 49.
+At the point of maximal restoration (step 107), a 3D visualization of the memory field $W(x)$ shows distinct semantic traces along both beams. Beam A's pathway, which had previously faded, exhibits reemerging structure aligned with the original target $T^*_A$. This occurs despite $T^*_A$ being excluded from the update rule after step 49.
 
 **Figure 2: 3D Memory Field Visualization**  
 ![Illustration 2 - Memory State](files/ex06_memory_state.png)  
@@ -112,7 +112,7 @@ At the point of maximal restoration (step 107), a 3D visualization of the memory
 
 This experiment confirms the existence of spontaneous memory restoration in Holographic Projection Memory (HPM) when utilizing associative update rules. After initial semantic interference caused by the projection of an orthogonal target along an intersecting path, the memory trace of a previously imprinted target was observed to re-emerge solely due to continued updates along the conflicting beam, without any direct reinforcement.
 
-This behavior demonstrates that the associative update function $\mathcal{F}\_{\mathrm{assoc}}$, which modulates updates based on alignment and local memory density, is capable not only of preserving semantic content but also of reactivating latent memory patterns. The emergence of such attractor-like dynamics suggests that HPM embodies properties of content-addressable memory, even in the absence of explicit recall mechanisms.
+This behavior demonstrates that the associative update function $\mathcal{F}_{\mathrm{assoc}}$, which modulates updates based on alignment and local memory density, is capable not only of preserving semantic content but also of reactivating latent memory patterns. The emergence of such attractor-like dynamics suggests that HPM embodies properties of content-addressable memory, even in the absence of explicit recall mechanisms.
 
 Moreover, this restoration effect is not universal: it requires repeated updates with a fixed projection target and does not occur when projection targets are randomized, emphasizing the role of semantic consistency in triggering associative convergence.
 

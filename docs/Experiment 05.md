@@ -2,14 +2,14 @@
 
 **Related source code**  
 
-The source codes of the experiment are:
-1. /examples/ex05_minimal_hpm_memory_update_01_delta.py
-2. /examples/ex05_minimal_hpm_memory_update_02_suppresive.py
-3. /examples/ex05_minimal_hpm_memory_update_03_associative.py
-4. /examples/ex05_minimal_hpm_memory_update_04_reflexive.py
+The source codes of the experiment are:  
+1. /examples/ex05_minimal_hpm_memory_update_01_delta.py  
+2. /examples/ex05_minimal_hpm_memory_update_02_suppresive.py  
+3. /examples/ex05_minimal_hpm_memory_update_03_associative.py  
+4. /examples/ex05_minimal_hpm_memory_update_04_reflexive.py  
 
 *Additional:*  
-The visualization code for the loss dynamics: /examples/ex05_visualize_loss.py
+The visualization code for the loss dynamics: /examples/ex05_visualize_loss.py  
 
 ---
 
@@ -17,7 +17,7 @@ The visualization code for the loss dynamics: /examples/ex05_visualize_loss.py
 
 The Holographic Projection Memory (HPM) architecture enables memory updates through localized, projection-aligned modifications of a differentiable memory field $W(x) \in \mathbb{R}^C$. Each update is applied via a kernel-weighted path $\ell(t) = o + t \cdot v$, with spatial modulation governed by a Gaussian-like projection kernel $K(x, \ell)$. Unlike traditional models, which rely on global gradient updates, HPM permits direct, inference-time modification through projection errors $\delta \in \mathbb{R}^C$, enabling continual, context-sensitive learning.
 
-In this experiment, we investigate the convergence behavior and memory preservation properties of four distinct update modes (described in Appendix B of HPM documentation) under spatial conflict. Specifically, we examine how new, randomly sampled targets $T^\*\_B$ affect the integrity of a previously encoded memory $T^\*\_A$ when their projection paths overlap within the same spatial region of the memory field.
+In this experiment, we investigate the convergence behavior and memory preservation properties of four distinct update modes (described in Appendix B of HPM documentation) under spatial conflict. Specifically, we examine how new, randomly sampled targets $T^*_B$ affect the integrity of a previously encoded memory $T^*_A$ when their projection paths overlap within the same spatial region of the memory field.
 
 ---
 
@@ -68,7 +68,7 @@ $$
 \Delta W(x) = \alpha \cdot \mathcal{F}_k\big(x; \, \delta_B, \, W(x), \, K(x, \ell_B)\big)
 $$
 
-where $\delta\_B = T^\*\_{B} - T\_{B}$ is the projection error.
+where $\delta_B = T^*_{B} - T_{B}$ is the projection error.
 
 * At each step, the following are recorded:
 
@@ -104,10 +104,8 @@ All values are reported after training on the same memory instance and under ide
 
 ---
 
-### Delta Update
-
+### Delta Update  
 ![Illustration 1 - Loss Dynamics (Delta, stage B)](files/ex05_delta_b.png)  
-
 * $\text{MSE}_B = 9.752 \times 10^{-4}$
 * $\text{MSE}_A = 6.429 \times 10^{-3}$
 * Converged in 135 steps
@@ -116,10 +114,8 @@ This unfiltered update mode achieves fast convergence to target B but causes sev
 
 ---
 
-### Suppressive Update
-
+### Suppressive Update  
 ![Illustration 2 - Loss Dynamics (Suppressive, stage B)](files/ex05_suppresive_b.png)  
-
 * $\text{MSE}_B = 9.917 \times 10^{-4}$
 * $\text{MSE}_A = 5.286 \times 10^{-4}$
 * Converged in 273 steps
@@ -128,10 +124,8 @@ Suppressive amplification significantly mitigates memory damage, preserving the 
 
 ---
 
-### Associative Update
-
+### Associative Update  
 ![Illustration 3 - Loss Dynamics (Associative, stage B)](files/ex05_associative_b.png)  
-
 * $\text{MSE}_B = 9.702 \times 10^{-4}$
 * $\text{MSE}_A = 7.149 \times 10^{-4}$
 * Converged in 212 steps
@@ -140,10 +134,8 @@ Associative modulation strikes a balance between convergence and preservation. I
 
 ---
 
-### Reflexive Update
-
+### Reflexive Update  
 ![Illustration 4 - Loss Dynamics (Reflexive, stage B)](files/ex05_reflexive_b.png)  
-
 * $\text{MSE}_B = 9.867 \times 10^{-4}$
 * $\text{MSE}_A = 4.713 \times 10^{-4}$
 * Converged in 16 steps
@@ -183,7 +175,7 @@ with $\sigma \in \mathbb{R}^+$ denoting the standard deviation of the initial di
 
 ### Interpretation
 
-Both $\mathcal{F}\_\mathrm{assoc}$ and $\mathcal{F}\_\mathrm{refl}$ rely on internal state measures derived from the memory field:
+Both $\mathcal{F}_\mathrm{assoc}$ and $\mathcal{F}_\mathrm{refl}$ rely on internal state measures derived from the memory field:
 
 * Cosine similarity: $\cos(\theta) = \frac{\langle u, v \rangle}{\lVert u \rVert _2 \cdot \lVert v \rVert _2}$
 * Norms: $\lVert W(x) \rVert _2$, used for significance and resistance
@@ -206,7 +198,7 @@ These results are consistent with the general principle that adaptive update rul
 
 ## Conclusion
 
-This experiment systematically evaluated the convergence and memory-preserving properties of four distinct projection-based update modes in the Holographic Projection Memory (HPM) framework. Each mode was tested under controlled conditions involving spatial overlap between new random target projections $T^\*\_B$ and an existing memory trace $T^\*\_A$.
+This experiment systematically evaluated the convergence and memory-preserving properties of four distinct projection-based update modes in the Holographic Projection Memory (HPM) framework. Each mode was tested under controlled conditions involving spatial overlap between new random target projections $T^*_B$ and an existing memory trace $T^*_A$.
 
 ---
 

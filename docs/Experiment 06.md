@@ -6,6 +6,7 @@ The source code of the experiment is: /examples/ex06_minimal_hpm_associative_mem
 
 *Additional:*  
 The visualization code for the loss dynamics: /examples/ex06_visualize_loss.py
+The visualization code for the memory dynamics: /examples/ex06_visualise_memory_dynamic.py
 
 ---
 

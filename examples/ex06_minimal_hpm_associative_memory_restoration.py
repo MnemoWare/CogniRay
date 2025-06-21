@@ -58,7 +58,6 @@ def save_memory_state(
     memory: torch.Tensor,
     target_A: torch.Tensor,
     target_B: torch.Tensor,
-    prefix: str,
 ) -> None:
     torch.save(
         obj=dict(
@@ -66,7 +65,19 @@ def save_memory_state(
             target_A = target_A,
             target_B = target_B,
         ),
-        f=f"{script_dir}/data/ex06/{prefix + '_' if prefix is not None else ''}memory_state.datarec.pt",
+        f=f"{script_dir}/data/ex06/memory_dynamics.datarec.pt",
+    )
+
+def log_loss(
+    loss_A: torch.Tensor,
+    loss_B: torch.Tensor,
+) -> None:
+    torch.save(
+        obj=dict(
+            loss_A = loss_A,
+            loss_B = loss_B,
+        ),
+        f=f"{script_dir}/data/ex06/loss_dynamics.datarec.pt",
     )
 
 # Init mem
@@ -86,9 +97,11 @@ ray_B_direction = F.normalize(torch.tensor([+1.0, -1.0, +0.5], device=device) + 
 ray_A_target = torch.randn([channels], device=device)
 ray_B_target = torch.randn([channels], device=device)
 
-# Stage A: 
-memory_dynamics_buffer = []
+# Shared loss accumulators
+loss_A_accum = []
+loss_B_accum = []
 
+# Stage A: 
 print("Begin Stage A: writing target A.")
 for step in range(stage_A_steps):
     with torch.no_grad():
@@ -103,11 +116,8 @@ for step in range(stage_A_steps):
         delta = targets - projections
         hpm.write_delta(origins, directions, delta, stage_A_alpha)
 
-        memory_dynamics_buffer.append(hpm.memory.data.clone().detach().cpu())
-
-memory_dynamics_buffer = torch.stack(memory_dynamics_buffer, dim=0)
-save_memory_state(hpm.memory.data, ray_A_target.data, None, "stage_a")
-save_memory_state(memory_dynamics_buffer, ray_A_target.data, None, "stage_a_dynamics")
+        loss_A_accum.append(loss)
+        loss_B_accum.append(torch.zeros_like(loss))
 
 # Stage B:
 a = F.normalize(ray_A_target, dim=0)
@@ -136,8 +146,10 @@ for step in range(stage_B_steps_delta + stage_B_steps_associative):
         else:
             hpm.write_associative(origins[1].unsqueeze(0), directions[1].unsqueeze(0), delta[1].unsqueeze(0), stage_B_alpha_associative)
 
-        memory_dynamics_buffer.append(hpm.memory.data.clone().detach().cpu())
+    memory_dynamics_buffer.append(hpm.memory.data.clone().detach().cpu())
+    loss_A_accum.append(loss_A)
+    loss_B_accum.append(loss_B)
 
 memory_dynamics_buffer = torch.stack(memory_dynamics_buffer, dim=0)
-save_memory_state(hpm.memory.data, ray_A_target.data, ray_B_target.data, "stage_b")
-save_memory_state(memory_dynamics_buffer, ray_A_target.data, ray_B_target.data, "stage_b_dynamics")
+save_memory_state(memory_dynamics_buffer, ray_A_target.data, ray_B_target.data)
+log_loss(torch.stack(loss_A_accum, dim=0), torch.stack(loss_B_accum, dim=0))

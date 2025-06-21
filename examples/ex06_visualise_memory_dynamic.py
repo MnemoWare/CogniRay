@@ -9,24 +9,22 @@ project_dir = os.path.dirname(script_dir)
 sys.path.append(project_dir)
 
 parser = argparse.ArgumentParser(description="Experiment 04 visualization (memory dynamics)")
-parser.add_argument("--stage", help="Input stage code: a|b|c", required=True)
-parser.add_argument("--threshold", help="Visualisation threshold", required=False, default=1.0e-3, type=float)
+parser.add_argument("--threshold", help="Visualisation threshold", required=False, default=1.0e-2, type=float)
 args = parser.parse_args()
 
 # Load memory state
-stage = str(args.stage).strip()
-data = torch.load(f"{script_dir}/data/ex06/stage_{stage}_dynamics_memory_state.datarec.pt")
+data = torch.load(f"{script_dir}/data/ex06/memory_dynamics.datarec.pt")
 memory = data["memory"].cpu()
 target_A = data["target_A"].cpu()
-target_B = data["target_B"].cpu() if data["target_B"] is not None else 0.0
+target_B = data["target_B"].cpu()
 
 # Scalar density
 density_a = (memory * target_A.view(1, 1, 1, 1, -1)).abs().sum(dim=-1)
-density_b = (memory * target_B.view(1, 1, 1, 1, -1)).abs().sum(dim=-1) if data["target_B"] is not None else 0.0
+density_b = (memory * target_B.view(1, 1, 1, 1, -1)).abs().sum(dim=-1)
 
 # Normalize density
 density_a = density_a / (density_a.max() + 1e-8) * -1.0
-density_b = density_b / (density_b.max() + 1e-8) if data["target_B"] is not None else 0.0
+density_b = density_b / (density_b.max() + 1e-8)
 heat = density_a + density_b
 heat = heat / heat.abs().max()
 
@@ -88,7 +86,7 @@ _, size_x, size_y, size_z = heat.shape
 fig = go.Figure(
     data=[initial_frame],
     layout=go.Layout(
-        title=f"HPM Memory Dynamics — Stage {stage.upper()}",
+        title=f"HPM Memory Dynamics",
         scene=dict(
             xaxis_title="X",
             yaxis_title="Y",

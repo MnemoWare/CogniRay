@@ -8,7 +8,7 @@ script_dir = os.path.dirname(os.path.abspath(__file__))
 project_dir = os.path.dirname(script_dir)
 sys.path.append(project_dir)
 
-parser = argparse.ArgumentParser(description="Experiment 04 visualization (final memory states)")
+parser = argparse.ArgumentParser(description="Experiment 06 visualization (final memory states)")
 parser.add_argument("--stage", help="Input stage code: a|b|c", required=True)
 parser.add_argument("--threshold", help="Visualisation threshold", required=False, default=1.0e-3, type=float)
 args = parser.parse_args()

@@ -49,6 +49,19 @@ eps = 1.0e-3
 
 device = 'cuda' if torch.cuda.is_available() else 'cpu'
 
+def log_loss(
+    loss_A: torch.Tensor,
+    loss_other: torch.Tensor,
+    prefix: str,
+) -> None:
+    torch.save(
+        obj=dict(
+            loss_A = loss_A,
+            loss_other = loss_other,
+        ),
+        f=f"{script_dir}/data/ex05/{prefix + '_' if prefix is not None else ''}loss_dynamics.datarec.pt",
+    )
+
 # Init mem
 hpm = MinimalHPM(
     shape=[side, side, side],
@@ -69,6 +82,7 @@ ray_A_target = torch.randn([channels], device=device)
 print("Begin Stage A: imprinting target A.")
 step = 0
 target_loss_reached = False
+loss_A_accum = []
 while target_loss_reached is not True:
     with torch.no_grad():
         origins = torch.stack([ray_A_origin], dim=0)
@@ -85,8 +99,12 @@ while target_loss_reached is not True:
         if loss.item() <= stage_A_target_loss:
             target_loss_reached = True
             print(f"Stage A: target loss {stage_A_target_loss} reached on step {step:03d}")
+        
+        loss_A_accum.append(loss)
 
     step += 1
+
+log_loss(torch.stack(loss_A_accum, dim=0), None, "delta_stage_a")
 
 # Stage B:
 ray_other_origin = torch.tensor(
@@ -108,6 +126,8 @@ ray_other_target = torch.randn([ray_other_origin.shape[0], channels], device=dev
 print("Begin Stage B: project four random targets into overlapping region. Do not update A.")
 step = 0
 target_loss_reached = False
+loss_A_accum = []
+loss_B_accum = []
 while target_loss_reached is not True:
     with torch.no_grad():
         origins = torch.cat([ray_A_origin.unsqueeze(0), ray_other_origin], dim=0)
@@ -126,5 +146,10 @@ while target_loss_reached is not True:
         if loss_other.item() <= stage_B_target_loss:
             target_loss_reached = True
             print(f"Stage B: target loss {stage_B_target_loss} reached on step {step:03d}")
+        
+        loss_A_accum.append(loss_A)
+        loss_B_accum.append(loss_other)
 
     step += 1
+
+log_loss(torch.stack(loss_A_accum, dim=0), torch.stack(loss_B_accum, dim=0), "delta_stage_b")

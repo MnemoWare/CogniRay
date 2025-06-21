@@ -149,3 +149,7 @@ For commercial licensing, please contact: **[sombressoul@gmail.com](mailto:sombr
 
 **Konstantin Bashinskiy (a.k.a. Sombressoul)**  
 AI researcher, memory reconstruction theorist, and occasional code-wrestler.
+
+---
+
+*Note: Previous versions contained a typographic error in the author’s surname. This has been corrected ([6057f51fc9d2e273cdbe45210c965770e3f84ac7](https://github.com/MnemoWare/CogniRay/commit/6057f51fc9d2e273cdbe45210c965770e3f84ac7)) for legal and attribution clarity.*

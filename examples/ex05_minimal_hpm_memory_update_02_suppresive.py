@@ -40,7 +40,7 @@ stage_A_steps = 25
 
 # Stage B params
 stage_B_alpha_suppresive = 0.001
-stage_B_steps_suppresive = 50
+stage_B_steps_suppresive = 300
 
 # Global params
 tau = 8.0

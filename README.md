@@ -127,7 +127,7 @@ Licensed under **Creative Commons Attribution–NonCommercial–ShareAlike 4.0 I
 
 You are free to read, redistribute, and adapt the documentation for non-commercial purposes, provided that:
 
-* Proper attribution is given (Konstantin Bashinsky)
+* Proper attribution is given (Konstantin Bashinskiy)
 * Derivative works are shared under the same license
 
 ### **Code and Implementations**
@@ -147,5 +147,5 @@ For commercial licensing, please contact: **[sombressoul@gmail.com](mailto:sombr
 
 ## Author
 
-**Konstantin Bashinsky (a.k.a. Sombressoul)**  
+**Konstantin Bashinskiy (a.k.a. Sombressoul)**  
 AI researcher, memory reconstruction theorist, and occasional code-wrestler.

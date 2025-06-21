@@ -1,7 +1,7 @@
 import torch
 import torch.nn.functional as F
 
-# Copyright 2025 (c) Konstantin Bashinsky
+# Copyright 2025 (c) Konstantin Bashinskiy
 # Licensed under the CogniRay Non-Commercial License v1.0
 
 class MinimalHPM(torch.nn.Module):

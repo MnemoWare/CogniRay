@@ -58,7 +58,7 @@ $$
 T = \int_{\mathbb{R}^N} W(x) \cdot K(x, \ell) \, dx
 $$
 
-Upon receiving a target response $T^*$, the projection error is defined as $\delta = T^* - T$. The memory field is then updated to reduce this error by distributing it spatially through the kernel. The update rule is:
+Upon receiving a target response $T^\*$ , the projection error is defined as $\delta = T^* - T$. The memory field is then updated to reduce this error by distributing it spatially through the kernel. The update rule is:
 
 $$
 \Delta W(x) = \alpha \cdot \mathcal{F}(x; \delta, W(x), K(x, \ell))
@@ -128,7 +128,7 @@ $$
 where:
 
 * $U(x) = \alpha \cdot \delta \cdot K(x, \ell)$ is the primary update term,
-* $R(x) = \alpha \cdot W(x) \cdot \max K + K(x, \ell) \cdot \operatorname{sign}(W(x))$ is a refresh vector that captures the existing memory orientation,
+* $R(x) = \alpha \cdot W(x) \cdot \max K + K(x, \ell) \cdot \text{sign}(W(x))$ is a refresh vector that captures the existing memory orientation,
 * $\alpha > 0$ is a learning coefficient.
 
 The modulation function can be expressed as:
@@ -171,7 +171,7 @@ $$
 where:
 
 * $U(x) = \alpha \cdot \delta \cdot K(x, \ell)$ is the raw update vector,
-* $R(x) = \alpha \cdot W(x) \cdot \max K + K(x, \ell) \cdot \operatorname{sign}(W(x))$ is a context-dependent refresh term,
+* $R(x) = \alpha \cdot W(x) \cdot \max K + K(x, \ell) \cdot \text{sign}(W(x))$ is a context-dependent refresh term,
 * $U'(x) = \left( U(x)^2 + R(x)^2 \right)^{1/2} \cdot U(x)$ is the composite update vector,
 * $A(x)$ is a scalar trust coefficient encoding semantic alignment and memory significance.
 
@@ -184,7 +184,7 @@ $$
 and the significance score is:
 
 $$
-Z(x) = \frac{\|W(x)\|}{\max \|W(x)\| \cdot \alpha}
+Z(x) = \frac{\lVert W(x)\rVert}{\max \lVert W(x)\rVert \cdot \alpha}
 $$
 
 Thus, the total trust coefficient is:
@@ -231,13 +231,13 @@ $$
 where:
 
 * $U(x) = \alpha \cdot \delta \cdot K(x, \ell)$ is the raw delta-based update,
-* $R(x) = \alpha \cdot W(x) \cdot \max K + K(x, \ell) \cdot \operatorname{sign}(W(x))$ is the refresh term reflecting memory orientation,
+* $R(x) = \alpha \cdot W(x) \cdot \max K + K(x, \ell) \cdot \text{sign}(W(x))$ is the refresh term reflecting memory orientation,
 * $U'(x) = \left( U(x)^2 + R(x)^2 \right)^{1/2} \cdot U(x)$ is the combined modulation vector,
 * $A(x)$ is a trust-based alignment factor (as defined in the associative update),
 * $\rho(x)$ is the **resistance factor**, defined by deviation from the unfiltered update:
 
 $$
-\rho(x) = \frac{\left\| A(x) \cdot U'(x) - U(x) \right\|}{\max_{x} \left\| A(x) \cdot U'(x) - U(x) \right\|}
+\rho(x) = \frac{\left\lVert A(x) \cdot U'(x) - U(x) \right\rVert}{\max_{x} \left\lVert A(x) \cdot U'(x) - U(x) \right\rVert}
 $$
 
 
@@ -283,7 +283,7 @@ We summarize the four regimes below:
 
 ### Gradient of Selectivity and Protection
 
-The transition from $\mathcal{F}_\mathrm{delta}$ to $\mathcal{F}_\mathrm{refl}$ represents a progressive shift:
+The transition from $\mathcal{F}\_\mathrm{delta}$ to $\mathcal{F}\_\mathrm{refl}$ represents a progressive shift:
 
 * From raw, unfiltered updates to highly modulated and context-aware adjustments;
 * From uniform injection to spatially differentiated response based on alignment and trust;
@@ -291,17 +291,17 @@ The transition from $\mathcal{F}_\mathrm{delta}$ to $\mathcal{F}_\mathrm{refl}$ 
 
 This hierarchy enables memory systems to operate in multiple regimes of learning:
 
-* **Plastic** ($\mathcal{F}_\mathrm{delta}$, $\mathcal{F}_\mathrm{sup}$) — useful during early-stage adaptation or structural initialization;
-* **Stable** ($\mathcal{F}_\mathrm{assoc}$, $\mathcal{F}_\mathrm{refl}$) — required for consolidation, safe incremental integration, and long-term memory integrity.
+* **Plastic** ($\mathcal{F}\_\mathrm{delta}$, $\mathcal{F}\_\mathrm{sup}$) — useful during early-stage adaptation or structural initialization;
+* **Stable** ($\mathcal{F}\_\mathrm{assoc}$, $\mathcal{F}\_\mathrm{refl}$) — required for consolidation, safe incremental integration, and long-term memory integrity.
 
 ### Formal Implication
 
 Let $\mathcal{F}_i$ and $\mathcal{F}_j$ denote two modulation strategies such that:
 
 $$
-\forall x, \; \|\mathcal{F}_i(x)\| \geq \|\mathcal{F}_j(x)\| \implies \mathcal{F}_i \text{ permits more aggressive modification than } \mathcal{F}_j.
+\forall x, \lVert\mathcal{F}_i(x)\rVert \geq \lVert\mathcal{F}_j(x)\rVert \implies \mathcal{F}_i \text{ permits more aggressive modification than } \mathcal{F}_j.
 $$
 
-This defines a partial ordering over the family $\{ \mathcal{F}_\mathrm{delta}, \mathcal{F}_\mathrm{sup}, \mathcal{F}_\mathrm{assoc}, \mathcal{F}_\mathrm{refl} \}$ by increasing restrictiveness and memory preservation.
+This defines a partial ordering over the family $\{ \mathcal{F}\_\mathrm{delta}, \mathcal{F}\_\mathrm{sup}, \mathcal{F}\_\mathrm{assoc}, \mathcal{F}\_\mathrm{refl} \}$ by increasing restrictiveness and memory preservation.
 
 In summary, the architecture of $\mathcal{F}$ determines not only the dynamics of learning but also the epistemic boundary between adaptation and preservation. By appropriately selecting or combining these modulation regimes, one can tailor projection-based memory systems for robustness, efficiency, or flexibility across learning domains.

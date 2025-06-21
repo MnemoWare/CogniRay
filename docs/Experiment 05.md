@@ -17,7 +17,7 @@ The visualization code for the loss dynamics: /examples/ex05_visualize_loss.py
 
 The Holographic Projection Memory (HPM) architecture enables memory updates through localized, projection-aligned modifications of a differentiable memory field $W(x) \in \mathbb{R}^C$. Each update is applied via a kernel-weighted path $\ell(t) = o + t \cdot v$, with spatial modulation governed by a Gaussian-like projection kernel $K(x, \ell)$. Unlike traditional models, which rely on global gradient updates, HPM permits direct, inference-time modification through projection errors $\delta \in \mathbb{R}^C$, enabling continual, context-sensitive learning.
 
-In this experiment, we investigate the convergence behavior and memory preservation properties of four distinct update modes (described in Appendix B of HPM documentation) under spatial conflict. Specifically, we examine how new, randomly sampled targets $T^*_B$ affect the integrity of a previously encoded memory $T^*_A$ when their projection paths overlap within the same spatial region of the memory field.
+In this experiment, we investigate the convergence behavior and memory preservation properties of four distinct update modes (described in Appendix B of HPM documentation) under spatial conflict. Specifically, we examine how new, randomly sampled targets $T^\*\_B$ affect the integrity of a previously encoded memory $T^\*\_A$ when their projection paths overlap within the same spatial region of the memory field.
 
 ---
 
@@ -68,12 +68,12 @@ $$
 \Delta W(x) = \alpha \cdot \mathcal{F}_k\big(x; \, \delta_B, \, W(x), \, K(x, \ell_B)\big)
 $$
 
-where $\delta_B = T^*_{B} - T_{B}$ is the projection error.
+where $\delta\_B = T^\*\_{B} - T\_{B}$ is the projection error.
 
 * At each step, the following are recorded:
 
-  * $\text{MSE}_B = \|T_B - T^*_B\|_2^2$
-  * $\text{MSE}_A = \|T_A - T^*_A\|_2^2$
+  * $\text{MSE}_B = \lVert T_B - T^*_B\rVert _2^2$
+  * $\text{MSE}_A = \lVert T_A - T^*_A\rVert _2^2$
 
 * The experiment continues until $\text{MSE}_B < \varepsilon$ or a maximum number of steps is reached.
 
@@ -85,8 +85,8 @@ This setup allows assessment of convergence behavior under semantic interference
 
 This section summarizes the performance of each memory update mode during Stage B of the experiment, where conflicting projections were introduced. Each method is evaluated with respect to three metrics:
 
-* Final projection error for target B: $\text{MSE}_B = \|T_B - T^*_B\|_2^2$
-* Final projection error for preserved target A: $\text{MSE}_A = \|T_A - T^*_A\|_2^2$
+* Final projection error for target B: $\text{MSE}_B = \lVert T_B - T^*_B\rVert _2^2$
+* Final projection error for preserved target A: $\text{MSE}_A = \lVert T_A - T^*_A\rVert _2^2$
 * Number of steps to convergence ($\text{MSE}_B < 10^{-3}$)
 
 All values are reported after training on the same memory instance and under identical conditions (random seed is frozen across all experiments).
@@ -183,10 +183,10 @@ with $\sigma \in \mathbb{R}^+$ denoting the standard deviation of the initial di
 
 ### Interpretation
 
-Both $\mathcal{F}_\mathrm{assoc}$ and $\mathcal{F}_\mathrm{refl}$ rely on internal state measures derived from the memory field:
+Both $\mathcal{F}\_\mathrm{assoc}$ and $\mathcal{F}\_\mathrm{refl}$ rely on internal state measures derived from the memory field:
 
-* Cosine similarity: $\cos(\theta) = \frac{\langle u, v \rangle}{\|u\|_2 \cdot \|v\|_2}$
-* Norms: $\|W(x)\|_2$, used for significance and resistance
+* Cosine similarity: $\cos(\theta) = \frac{\langle u, v \rangle}{\lVert u \rVert _2 \cdot \lVert v \rVert _2}$
+* Norms: $\lVert W(x) \rVert _2$, used for significance and resistance
 
 These metrics become ill-conditioned in low-variance environments, leading to poor alignment estimation and unreliable modulation weights. Thus, semantic filtering mechanisms built into these update modes require a non-trivial activation baseline to function effectively.
 
@@ -206,7 +206,7 @@ These results are consistent with the general principle that adaptive update rul
 
 ## Conclusion
 
-This experiment systematically evaluated the convergence and memory-preserving properties of four distinct projection-based update modes in the Holographic Projection Memory (HPM) framework. Each mode was tested under controlled conditions involving spatial overlap between new random target projections $T^*_B$ and an existing memory trace $T^*_A$.
+This experiment systematically evaluated the convergence and memory-preserving properties of four distinct projection-based update modes in the Holographic Projection Memory (HPM) framework. Each mode was tested under controlled conditions involving spatial overlap between new random target projections $T^\*\_B$ and an existing memory trace $T^\*\_A$.
 
 ---
 

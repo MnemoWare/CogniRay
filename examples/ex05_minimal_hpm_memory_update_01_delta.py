@@ -3,8 +3,6 @@ import sys
 import torch
 import torch.nn.functional as F
 
-from typing import Union
-
 script_dir = os.path.dirname(os.path.abspath(__file__))
 project_dir = os.path.dirname(script_dir)
 sys.path.append(project_dir)

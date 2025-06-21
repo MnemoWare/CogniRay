@@ -97,6 +97,8 @@ class MinimalHPM(torch.nn.Module):
 
         Combines update and current memory field state to amplify already known features.
         Useful for gentle overwriting and consolidation.
+
+        Note: memory density agnostic write method.
         """
         
         B = ray_origin.shape[0]
@@ -122,6 +124,8 @@ class MinimalHPM(torch.nn.Module):
         Enhances aligned updates and suppresses conflicting ones by evaluating projection similarity
         with existing memory content. Balances reinforcement and forgetting.
         Ideal for contextual refinement and stable integration.
+
+        Note: better for writing into regions with high memory density (>~1.0e-2).
         """
         
         B = ray_origin.shape[0]
@@ -161,6 +165,8 @@ class MinimalHPM(torch.nn.Module):
         Updates memory only when the projection is aligned and coherent with existing content.
         Incorporates environmental resistance to protect established structures.
         Enables safe insertion of new knowledge without overwriting prior memories.
+
+        Note: better for writing into regions with medium and high memory density (>~1.0e-4).
         """
 
         B = ray_origin.shape[0]

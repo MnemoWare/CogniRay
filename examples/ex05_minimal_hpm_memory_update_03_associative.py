@@ -27,7 +27,7 @@ torch.manual_seed(1337)
 # Result - Stage B:
 #   Stage B: step 00 | MSE: 0.93652594 | MSE A/other: 0.00001419/1.17065382
 #   ...
-#   Stage B: step 49 | MSE: 0.61300713 | MSE A/other: 0.00023416/0.76620036
+#   Stage B: step 219 | MSE: 0.00068213 | MSE A/other: 0.00046482/0.00073645
 #
 
 # Params

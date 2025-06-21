@@ -45,7 +45,7 @@ where $\sigma = 1.5$ and $\tau = 4.0$.
 Two fixed projection beams are used:
 
 * **Beam A**: Defined by origin $o_A$ and direction $v_A$, assigned a fixed random target $T^*_A \in \mathbb{R}^C$.
-* **Beam B**: Defined by origin $o_B$ and direction $v_B$, initially assigned an orthogonal target $T^*_B \in \mathbb{R}^C$ such that $\langle T^*_A, T^*_B \rangle = 0$.
+* **Beam B**: Defined by origin $o_B$ and direction $v_B$, initially assigned an orthogonal target $T^\*\_B \in \mathbb{R}^C$ such that $\langle T^\*_A, T^\*_B \rangle = 0$.
 
 The beams are constructed to intersect within the memory volume to ensure semantic conflict.
 
@@ -75,7 +75,7 @@ where $U'(x)$ is the combined update vector and $A(x)$ is a scalar trust coeffic
 Throughout both phases, the projection errors for A and B are recorded at each step:
 
 $$
-\text{MSE}_A = \|T_A - T^*_A\|_2^2, \quad \text{MSE}_B = \|T_B - T^*_B\|_2^2.
+\text{MSE}_A = \lVert T_A - T^*_A \rVert _2^2, \quad \text{MSE}_B = \lVert T_B - T^\*_B \rVert _2^2.
 $$
 
 The system is monitored for signs of restoration of $T^*_A$ during Stage B, despite the absence of any direct updates using beam A.
@@ -96,15 +96,15 @@ This behavior indicates spontaneous memory restoration. Meanwhile, $\text{MSE}_B
 
 **Figure 1: Log-Scale Loss Curves**  
 ![Illustration 1 - Loss Dynamics](files/ex06_loss_logarithmic_scale.png)  
-*Mean squared errors $\text{MSE}_A$ and $\text{MSE}_B$ plotted over all steps using logarithmic scaling to highlight subtle dynamics.*
+> Mean squared errors $\text{MSE}\_A$ and $\text{MSE}\_B$ plotted over all steps using logarithmic scaling to highlight subtle dynamics.
 
 ### Spatial Projection and Memory State
 
-At the point of maximal restoration (step 107), a 3D visualization of the memory field $W(x)$ shows distinct semantic traces along both beams. Beam A's pathway, which had previously faded, exhibits reemerging structure aligned with the original target $T^*_A$. This occurs despite $T^*_A$ being excluded from the update rule after step 49.
+At the point of maximal restoration (step 107), a 3D visualization of the memory field $W(x)$ shows distinct semantic traces along both beams. Beam A's pathway, which had previously faded, exhibits reemerging structure aligned with the original target $T^\*_A$. This occurs despite $T^\*_A$ being excluded from the update rule after step 49.
 
 **Figure 2: 3D Memory Field Visualization**  
 ![Illustration 2 - Memory State](files/ex06_memory_state.png)  
-*Cross-sectional rendering of $W(x)$ at step 107, with overlay of beam directions $\ell_A$ and $\ell_B$. Reconstructed memory structure along $\ell_A$ confirms spontaneous reactivation.*
+> Cross-sectional rendering of $W(x)$ at step 107, with overlay of beam directions $\ell_A$ and $\ell_B$. Reconstructed memory structure along $\ell_A$ confirms spontaneous reactivation.
 
 ---
 

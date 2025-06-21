@@ -23,6 +23,9 @@ This repository contains:
 - **Experiment 01**: HPM converges rapidly from zero to target projections under exact rays — validating core update mechanics.  
 - **Experiment 02**: HPM self-organizes from noise using only inferred projections — stable convergence, semantic drift, no backprop needed.  
 - **Experiment 03**: HPM supports classical SGD — matches Delta-Learning performance under noisy rays, confirming architectural compatibility.  
+- **Experiment 04**: HPM exhibits semantic drift and adaptive topological divergence under conflicting projection targets — projection geometry adjusts via SGD to preserve memory integrity.  
+- **Experiment 05**: Four update modes benchmarked under interference — reflexive update achieves fastest convergence and best memory protection, confirming protective capacity of geometrically filtered updates.  
+- **Experiment 06**: Associative dynamics enable spontaneous recovery of erased content — HPM behaves as an attractor system, revealing latent autoassociative memory properties.  
 
 ---
 

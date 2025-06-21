@@ -130,7 +130,7 @@ Suppressive amplification significantly mitigates memory damage, preserving the 
 
 ### Associative Update
 
-![Illustration 2 - Loss Dynamics (Suppressive, stage B)](files/ex05_associative_b.png)  
+![Illustration 3 - Loss Dynamics (Associative, stage B)](files/ex05_associative_b.png)  
 
 * $\text{MSE}_B = 9.702 \times 10^{-4}$
 * $\text{MSE}_A = 7.149 \times 10^{-4}$
@@ -142,7 +142,7 @@ Associative modulation strikes a balance between convergence and preservation. I
 
 ### Reflexive Update
 
-![Illustration 2 - Loss Dynamics (Reflexive, stage B)](files/ex05_reflexive_b.png)  
+![Illustration 4 - Loss Dynamics (Reflexive, stage B)](files/ex05_reflexive_b.png)  
 
 * $\text{MSE}_B = 9.867 \times 10^{-4}$
 * $\text{MSE}_A = 4.713 \times 10^{-4}$

@@ -1,8 +1,8 @@
-# CogniRay
+# CogniRay  
 
-Differentiable geometric memory for adaptive reasoning.
-
----
+[![License: CC BY-NC-SA 4.0](https://img.shields.io/badge/doc%20license-CC--BY--NC--SA--4.0-lightgrey.svg)](https://creativecommons.org/licenses/by-nc-sa/4.0/)
+[![License: CogniRay NCL v1.0](https://img.shields.io/badge/code%20license-CogniRay--NCL--v1.0-blue)](https://github.com/MnemoWare/CogniRay/blob/main/LICENSE_CODE)
+[![Status: Research Prototype](https://img.shields.io/badge/status-research%20prototype%200.1.0-orange)]()
 
 **CogniRay** is an experimental cognitive memory system built upon the principles of **Holographic Projection Memory (HPM)**.
 It is designed as a structured, differentiable, and geometrically projective memory substrate that supports active inference,
@@ -13,7 +13,6 @@ This repository contains:
 * Theoretical foundations of Holographic Projection Memory (HPM) and CogniRay (see `docs/`)
 * Minimal working implementation of HPM (read/write logic) (see `src/`)
 * Examples and exploratory notebooks demonstrating usage (see `examples/`)
-* *[Planned]* Core library for structured memory interfaces (see `cogniray/`)
 
 ---
 
@@ -26,6 +25,7 @@ This repository contains:
 - **Experiment 04**: HPM exhibits semantic drift and adaptive topological divergence under conflicting projection targets — projection geometry adjusts via SGD to preserve memory integrity.  
 - **Experiment 05**: Four update modes benchmarked under interference — reflexive update achieves fastest convergence and best memory protection, confirming protective capacity of geometrically filtered updates.  
 - **Experiment 06**: Associative dynamics enable spontaneous recovery of erased content — HPM behaves as an attractor system, revealing latent autoassociative memory properties.  
+- **Research Prototype (v0.1.0)**: First structured release of CogniRay — includes complete reference implementation, formal update modes, and six documented experiments. Demonstrates architectural coherence, functional stability, and practical applicability of Holographic Projection Memory in adaptive reasoning contexts.  
 
 ---
 
@@ -99,7 +99,7 @@ Though formulated in continuous space, HPM is implemented via voxelized tensors:
 
 ## Roadmap
 
-1. Stable research release (v0.1)
+1. ~~Stable research release (v0.1)~~
 2. Core CogniRay module for PyTorch
 3. Interactive visualization and ray tracing interface
 

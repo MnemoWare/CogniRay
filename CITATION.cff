@@ -1,0 +1,9 @@
+cff-version: 1.2.0
+title: CogniRay
+authors:
+  - family-names: Bashinskiy
+    given-names: Konstantin
+    affiliation: MnemoWare
+    orcid: https://orcid.org/0009-0005-3618-8265
+license: CogniRay Non-Commercial License v1.0
+repository-code: https://github.com/MnemoWare/CogniRay

@@ -1,19 +1,20 @@
 cff-version: 1.2.0
 message: "If you use this work, please cite it as below."
 title: "CogniRay: Holographic Projection Memory for Adaptive Reasoning"
-version: "0.1.0"
+version: 0.1.0
+date-released: 2025-06-21
 doi: 10.5281/zenodo.15712780
 authors:
   - family-names: Bashinskiy
     given-names: Konstantin
     affiliation: MnemoWare
-    orcid: https://orcid.org/0009-0005-3618-8265
+    orcid: "https://orcid.org/0009-0005-3618-8265"
 keywords:
-  - differentiable memory
-  - active inference
-  - projection-based learning
-  - neural fields
-  - semantic memory
-repository-code: https://github.com/MnemoWare/CogniRay
-license-url: https://github.com/MnemoWare/CogniRay/blob/main/LICENSE
+  - "differentiable memory"
+  - "active inference"
+  - "projection-based learning"
+  - "neural fields"
+  - "semantic memory"
+repository-code: "https://github.com/MnemoWare/CogniRay"
+license-url: "https://github.com/MnemoWare/CogniRay/blob/main/LICENSE"
 contact: license@cogniray.online

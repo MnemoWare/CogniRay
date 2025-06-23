@@ -144,7 +144,7 @@ You may use the code for:
 * Education
 * Personal non-commercial experimentation
 
-For commercial licensing, please contact: **[sombressoul@gmail.com](mailto:sombressoul@gmail.com)**
+For commercial licensing, please contact: **[license@cogniray.online](mailto:license@cogniray.online)**  
 
 ---
 

@@ -5,5 +5,8 @@ authors:
     given-names: Konstantin
     affiliation: MnemoWare
     orcid: https://orcid.org/0009-0005-3618-8265
+identifiers:
+  - type: doi
+    value: 10.5281/zenodo.15712780
 license: CogniRay Non-Commercial License v1.0
 repository-code: https://github.com/MnemoWare/CogniRay

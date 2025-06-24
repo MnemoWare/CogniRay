@@ -25,7 +25,7 @@ This repository contains:
 - **Experiment 04**: HPM exhibits semantic drift and adaptive topological divergence under conflicting projection targets — projection geometry adjusts via SGD to preserve memory integrity.  
 - **Experiment 05**: Four update modes benchmarked under interference — reflexive update achieves fastest convergence and best memory protection, confirming protective capacity of geometrically filtered updates.  
 - **Experiment 06**: Associative dynamics enable spontaneous recovery of erased content — HPM behaves as an attractor system, revealing latent autoassociative memory properties.  
-- **Research Prototype (v0.1.0)**: First structured release of CogniRay — includes complete reference implementation, formal update modes, and six documented experiments. Demonstrates architectural coherence, functional stability, and practical applicability of Holographic Projection Memory in adaptive reasoning contexts.  
+- **Research Prototype (v0.1.0)**: First structured release of CogniRay — includes complete reference implementation, formal update modes, and six documented experiments. Demonstrates architectural coherence, functional stability, and practical applicability of Holographic Projection Memory in adaptive reasoning contexts. Saved as a separate branch: [research-prototype-0-1-0](https://github.com/MnemoWare/CogniRay/tree/research-prototype-0-1-0)  
 
 ---
 

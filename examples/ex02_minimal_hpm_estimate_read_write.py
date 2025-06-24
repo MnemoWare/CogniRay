@@ -127,7 +127,11 @@ targets = targets.to(device)
 # Writing cycle
 for step in range(steps):
     with torch.no_grad():
-        scan_result, scan_origins, scan_dirs = hpm.scan()
+        scan_result, scan_origins, scan_dirs = hpm.scan(
+            resolution=side,
+            tau=tau,
+            sigma=sigma,
+        )
 
         new_ray_origins, new_ray_dirs = [], []
         for p in targets:

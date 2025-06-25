@@ -48,7 +48,7 @@ default_p_s_max = +1.5
 
 # Genetic search params
 genetic_search_samples = 1024
-genetic_search_top_k = 32
+genetic_search_top_k = 64
 genetic_search_new_random_rays = 512
 genetic_search_target_loss = 1.0e-3
 genetic_search_max_epochs = 16

@@ -48,10 +48,11 @@ default_p_s_max = +1.5
 
 # Genetic search params
 genetic_search_samples = 1024
-genetic_search_top_k = 64
-genetic_search_new_random_rays = 512
+genetic_search_top_k = 32
+genetic_search_new_random_rays = 256
 genetic_search_target_loss = 1.0e-3
 genetic_search_max_epochs = 16
+genetic_search_mutation_factor = 0.1
 
 device = 'cuda' if torch.cuda.is_available() else 'cpu'
 
@@ -206,6 +207,7 @@ def random_pairs(
 def mutate_rays(
     selection_result: RaysBest,
     count: int,
+    mutation_factor: float,
     device: torch.device,
 ) -> RaysParametrized:
     pairs = random_pairs(
@@ -238,6 +240,16 @@ def mutate_rays(
             weight=mutation_factor,
         ).clamp(default_p_s_min, default_p_s_max)
 
+        u_mutator = torch.empty_like(u).normal_(mean=0.0, std=1.0) * u.std(dim=-1, keepdim=True) + u.mean(dim=-1, keepdim=True)
+        v_mutator = torch.empty_like(v).normal_(mean=0.0, std=1.0) * v.std(dim=-1, keepdim=True) + v.mean(dim=-1, keepdim=True)
+        t_mutator = torch.empty_like(t).normal_(mean=0.0, std=1.0)
+        s_mutator = torch.empty_like(s).normal_(mean=0.0, std=1.0)
+
+        u = u + u_mutator * mutation_factor
+        v = v + v_mutator * mutation_factor
+        t = t + t_mutator * mutation_factor
+        s = s + s_mutator * mutation_factor
+
     p_u = torch.nn.Parameter(u.clone().detach().requires_grad_(True))
     p_v = torch.nn.Parameter(v.clone().detach().requires_grad_(True))
     p_t = torch.nn.Parameter(t.clone().detach().requires_grad_(True))
@@ -249,6 +261,7 @@ def new_generation(
     selection_result: RaysBest,
     generation_size: int,
     new_random_rays: int,
+    mutation_factor: float,
     device: torch.device,
 ) -> RaysParametrized:
     old_species = RaysParametrized(
@@ -264,6 +277,7 @@ def new_generation(
     hybrids = mutate_rays(
         selection_result=selection_result,
         count=generation_size - len(old_species.p_u) - len(new_species.p_u),
+        mutation_factor=mutation_factor,
         device=device,
     )
 
@@ -363,6 +377,7 @@ while target_loss_reached is not True:
         selection_result=best_rays,
         generation_size=genetic_search_samples,
         new_random_rays=genetic_search_new_random_rays,
+        mutation_factor=genetic_search_mutation_factor,
         device=device,
     )
 

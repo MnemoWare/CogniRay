@@ -100,9 +100,13 @@ Though formulated in continuous space, HPM is implemented via voxelized tensors:
 
 ## Roadmap
 
-1. ~~Stable research release (v0.1)~~
+1. Extended Research Release (v0.2)
 2. Core CogniRay module for PyTorch
 3. Interactive visualization and ray tracing interface
+
+## TODO:  
+
+- Conduct Experiment 07
 
 ---
 

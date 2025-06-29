@@ -106,8 +106,9 @@ Though formulated in continuous space, HPM is implemented via voxelized tensors:
 
 ## TODO:  
 
-- Conduct Experiment 07
-- Prepare and conduct Experiment 08
+- Conduct Experiment 07  
+- Prepare and conduct Experiment 08  
+- Prepare and conduct Experiment 09  
 
 ---
 

@@ -19,6 +19,9 @@ This repository contains:
 
 ## News  
 
+**07/2025**:  
+- **Research Prototype (v0.1.1)**: Extended reference implementation with verified projection search mechanisms. Includes `mem_search_genetic.py` (genetic ray synthesis) and `mem_search_random_samples_gradient_descent.py` (gradient descent over random projections). Confirms navigability of the memory field and supports experimental manipulation of projection vectors in learned memory space. Saved as a separate branch: [research-prototype-0-1-1](https://github.com/MnemoWare/CogniRay/tree/research-prototype-0-1-1)
+
 **06/2025**:  
 - **Experiment 01**: HPM converges rapidly from zero to target projections under exact rays — validating core update mechanics.  
 - **Experiment 02**: HPM self-organizes from noise using only inferred projections — stable convergence, semantic drift, no backprop needed.  

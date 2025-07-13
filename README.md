@@ -2,7 +2,7 @@
 
 [![License: CC BY-NC-SA 4.0](https://img.shields.io/badge/doc%20license-CC--BY--NC--SA--4.0-lightgrey.svg)](https://creativecommons.org/licenses/by-nc-sa/4.0/)
 [![License: CogniRay NCL v1.0](https://img.shields.io/badge/code%20license-CogniRay--NCL--v1.0-blue)](https://github.com/MnemoWare/CogniRay/blob/main/LICENSE_CODE)
-[![Status: Research Prototype](https://img.shields.io/badge/status-research%20prototype%200.1.0-orange)]()
+[![Status: Research Prototype](https://img.shields.io/badge/status-research%20prototype%200.1.1-orange)]()
 [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.15712780.svg)](https://doi.org/10.5281/zenodo.15712780)
 
 **CogniRay** is an experimental cognitive memory system built upon the principles of **Holographic Projection Memory (HPM)**.

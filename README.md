@@ -20,6 +20,7 @@ This repository contains:
 ## News  
 
 **07/2025**:  
+- **Public Website Launched**: CogniRay is now live at [CogniRay.online](https://cogniray.online) — featuring a complete interactive introduction to the theory, architecture, and experimental proof of Holographic Projection Memory. Designed as a readable, argument-driven exposition for researchers, engineers, and the cognitively curious. Includes detailed descriptions of projection geometry, update modes, and the semantic behavior of the memory field under real-time adaptation.
 - **Research Prototype (v0.1.1)**: Extended reference implementation with verified projection search mechanisms. Includes `mem_search_genetic.py` (genetic ray synthesis) and `mem_search_random_samples_gradient_descent.py` (gradient descent over random projections). Confirms navigability of the memory field and supports experimental manipulation of projection vectors in learned memory space. Saved as a separate branch: [research-prototype-0-1-1](https://github.com/MnemoWare/CogniRay/tree/research-prototype-0-1-1)
 
 **06/2025**:  
@@ -123,8 +124,8 @@ We design memory systems that learn by projecting, adapt by recalling, and scale
 
 > **MnemoWare. Shape your mind.**
 
-Project: [cogniray.online](https://cogniray.online) *(coming soon)*  
-Company: [mnemoware.com](https://mnemoware.com) *(coming soon)*  
+Project: [CogniRay.online](https://cogniray.online)  
+Company: [MnemoWare.com](https://mnemoware.com) *(coming soon)*  
 
 Telegram group: [CogniRay](https://t.me/CogniRay)  
 Telegram channel: [MnemoWare](https://t.me/MnemoWare)  

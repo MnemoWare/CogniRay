@@ -127,6 +127,8 @@ We design memory systems that learn by projecting, adapt by recalling, and scale
 Project: [CogniRay.online](https://cogniray.online)  
 Company: [MnemoWare.com](https://mnemoware.com) *(coming soon)*  
 
+X (ex. Twitter): [MnemoWare](https://x.com/MnemoWare)  
+
 Telegram group: [CogniRay](https://t.me/CogniRay)  
 Telegram channel: [MnemoWare](https://t.me/MnemoWare)  
 
